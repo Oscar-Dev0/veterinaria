@@ -1,2 +1,2 @@
 # veterinaria
-Esto esuno de los proyectos del colegio
+Este es uno de los proyectos del colegio.
