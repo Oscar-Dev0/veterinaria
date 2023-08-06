@@ -37,29 +37,30 @@
             // text_user
             // 
             text_user.BackColor = SystemColors.ScrollBar;
-            text_user.Font = new Font("Fredoka One", 11.9999981F, FontStyle.Regular, GraphicsUnit.Point);
-            text_user.Location = new Point(76, 96);
+            text_user.Font = new Font("Microsoft Sans Serif", 11.9999981F, FontStyle.Regular, GraphicsUnit.Point);
+            text_user.Location = new Point(81, 102);
             text_user.Name = "text_user";
-            text_user.Size = new Size(100, 27);
+            text_user.Size = new Size(100, 26);
             text_user.TabIndex = 0;
             // 
             // text_passwort
             // 
             text_passwort.BackColor = SystemColors.ScrollBar;
-            text_passwort.Font = new Font("Fredoka One", 11.9999981F, FontStyle.Regular, GraphicsUnit.Point);
-            text_passwort.Location = new Point(137, 163);
+            text_passwort.Font = new Font("Microsoft Sans Serif", 11.9999981F, FontStyle.Regular, GraphicsUnit.Point);
+            text_passwort.Location = new Point(138, 168);
             text_passwort.Name = "text_passwort";
-            text_passwort.Size = new Size(100, 27);
+            text_passwort.Size = new Size(100, 26);
             text_passwort.TabIndex = 1;
             // 
             // btn_Login
             // 
             btn_Login.BackColor = Color.Transparent;
             btn_Login.BackgroundImage = (Image)resources.GetObject("btn_Login.BackgroundImage");
-            btn_Login.BackgroundImageLayout = ImageLayout.Zoom;
+            btn_Login.BackgroundImageLayout = ImageLayout.Stretch;
+            btn_Login.Cursor = Cursors.Hand;
             btn_Login.FlatStyle = FlatStyle.Popup;
             btn_Login.ForeColor = Color.Transparent;
-            btn_Login.Location = new Point(242, 212);
+            btn_Login.Location = new Point(240, 235);
             btn_Login.Name = "btn_Login";
             btn_Login.Size = new Size(67, 104);
             btn_Login.TabIndex = 2;
@@ -72,13 +73,19 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.AppWorkspace;
             BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
-            ClientSize = new Size(321, 328);
+            BackgroundImageLayout = ImageLayout.Stretch;
+            ClientSize = new Size(344, 385);
             Controls.Add(btn_Login);
             Controls.Add(text_passwort);
             Controls.Add(text_user);
-            Font = new Font("Fredoka One", 8.999999F, FontStyle.Bold, GraphicsUnit.Point);
+            DoubleBuffered = true;
+            Font = new Font("Microsoft Sans Serif", 8.999999F, FontStyle.Bold, GraphicsUnit.Point);
+            FormBorderStyle = FormBorderStyle.FixedSingle;
             Icon = (Icon)resources.GetObject("$this.Icon");
+            MaximizeBox = false;
+            MdiChildrenMinimizedAnchorBottom = false;
             Name = "Veterinaria_login";
+            SizeGripStyle = SizeGripStyle.Hide;
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Login";
             Load += Form1_Load;

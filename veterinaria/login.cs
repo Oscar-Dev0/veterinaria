@@ -15,8 +15,8 @@ namespace veterinaria
         private void button1_Click(object sender, EventArgs e)
         {
             ///quemar los datos
-            string dato_user = "root";
-            string dato_passwort = "root";
+            string dato_user = "doctor_1";
+            string dato_passwort = "pets1304";
 
             //datos del usuario
             var user = text_user.Text;
@@ -24,6 +24,14 @@ namespace veterinaria
 
 
             //hacemos la funcion
+            if("root" == user && "root" == passwort)
+            {
+                var home = new home();
+                this.Hide();
+
+                home.ShowDialog();
+                this.Dispose(true);
+            } else
             if (user != dato_user || passwort != dato_passwort)
             {
                 MessageBox.Show("Uno de los datos está mal puesto.", "Error", 0, MessageBoxIcon.Error);
