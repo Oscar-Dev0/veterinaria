@@ -12,14 +12,11 @@ namespace veterinaria
 {
     public partial class home : Form
     {
-        public home()
+        public home(string doctor)
         {
             InitializeComponent();
+            lbl_doctor.Text = doctor;
         }
 
-        private void radioButton1_CheckedChanged(object sender, EventArgs e)
-        {
-
-        }
     }
 }

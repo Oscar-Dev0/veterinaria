@@ -41,14 +41,21 @@
             dateTimePicker1 = new DateTimePicker();
             txt_direccion = new TextBox();
             lbl_direccion = new Label();
-            radioButton1 = new RadioButton();
+            Rbtn_dead_yes = new RadioButton();
             richTextBox1 = new RichTextBox();
             lbl_diagnostico = new Label();
             lbl_inter = new Label();
             lbl_dead = new Label();
             gb_dead = new GroupBox();
+            Rbtn_dead_not = new RadioButton();
+            lbl_name_doctor = new Label();
+            lbl_doctor = new Label();
+            Rbtn_internar_not = new RadioButton();
+            Rbtn_internar_yes = new RadioButton();
+            gb_internar = new GroupBox();
             ((System.ComponentModel.ISupportInitialize)numericUpDown1).BeginInit();
             gb_dead.SuspendLayout();
+            gb_internar.SuspendLayout();
             SuspendLayout();
             // 
             // lbl_Dueno
@@ -170,18 +177,17 @@
             lbl_direccion.TabIndex = 12;
             lbl_direccion.Text = "Direccion del paciente";
             // 
-            // radioButton1
+            // Rbtn_dead_yes
             // 
-            radioButton1.AutoSize = true;
-            radioButton1.BackColor = Color.Red;
-            radioButton1.Location = new Point(3, -1);
-            radioButton1.Name = "radioButton1";
-            radioButton1.Size = new Size(34, 19);
-            radioButton1.TabIndex = 14;
-            radioButton1.TabStop = true;
-            radioButton1.Text = "Si";
-            radioButton1.UseVisualStyleBackColor = false;
-            radioButton1.CheckedChanged += radioButton1_CheckedChanged;
+            Rbtn_dead_yes.AutoSize = true;
+            Rbtn_dead_yes.BackColor = Color.Green;
+            Rbtn_dead_yes.Location = new Point(3, 3);
+            Rbtn_dead_yes.Name = "Rbtn_dead_yes";
+            Rbtn_dead_yes.Size = new Size(36, 21);
+            Rbtn_dead_yes.TabIndex = 14;
+            Rbtn_dead_yes.TabStop = true;
+            Rbtn_dead_yes.Text = "Si";
+            Rbtn_dead_yes.UseVisualStyleBackColor = false;
             // 
             // richTextBox1
             // 
@@ -232,18 +238,98 @@
             gb_dead.Anchor = AnchorStyles.None;
             gb_dead.BackColor = Color.Transparent;
             gb_dead.BackgroundImageLayout = ImageLayout.None;
-            gb_dead.Controls.Add(radioButton1);
+            gb_dead.Controls.Add(Rbtn_dead_not);
+            gb_dead.Controls.Add(Rbtn_dead_yes);
             gb_dead.FlatStyle = FlatStyle.Flat;
+            gb_dead.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
             gb_dead.ForeColor = Color.Transparent;
             gb_dead.ImeMode = ImeMode.Off;
             gb_dead.Location = new Point(484, 104);
             gb_dead.Margin = new Padding(0);
             gb_dead.Name = "gb_dead";
             gb_dead.Padding = new Padding(0);
-            gb_dead.Size = new Size(196, 27);
+            gb_dead.Size = new Size(88, 27);
             gb_dead.TabIndex = 0;
             gb_dead.TabStop = false;
-            gb_dead.Visible = false;
+            // 
+            // Rbtn_dead_not
+            // 
+            Rbtn_dead_not.AutoSize = true;
+            Rbtn_dead_not.BackColor = Color.Red;
+            Rbtn_dead_not.Location = new Point(45, 3);
+            Rbtn_dead_not.Name = "Rbtn_dead_not";
+            Rbtn_dead_not.Size = new Size(41, 21);
+            Rbtn_dead_not.TabIndex = 15;
+            Rbtn_dead_not.TabStop = true;
+            Rbtn_dead_not.Text = "no";
+            Rbtn_dead_not.UseVisualStyleBackColor = false;
+            // 
+            // lbl_name_doctor
+            // 
+            lbl_name_doctor.AutoSize = true;
+            lbl_name_doctor.BackColor = SystemColors.ControlDarkDark;
+            lbl_name_doctor.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
+            lbl_name_doctor.ForeColor = SystemColors.Control;
+            lbl_name_doctor.Location = new Point(531, 186);
+            lbl_name_doctor.Name = "lbl_name_doctor";
+            lbl_name_doctor.Size = new Size(185, 25);
+            lbl_name_doctor.TabIndex = 19;
+            lbl_name_doctor.Text = "Nombre del Doctor";
+            // 
+            // lbl_doctor
+            // 
+            lbl_doctor.AutoSize = true;
+            lbl_doctor.BackColor = SystemColors.ControlDarkDark;
+            lbl_doctor.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
+            lbl_doctor.ForeColor = SystemColors.Control;
+            lbl_doctor.Location = new Point(531, 214);
+            lbl_doctor.Name = "lbl_doctor";
+            lbl_doctor.Size = new Size(96, 25);
+            lbl_doctor.TabIndex = 20;
+            lbl_doctor.Text = "%Name%";
+            // 
+            // Rbtn_internar_not
+            // 
+            Rbtn_internar_not.AutoSize = true;
+            Rbtn_internar_not.BackColor = Color.Red;
+            Rbtn_internar_not.Location = new Point(47, 3);
+            Rbtn_internar_not.Name = "Rbtn_internar_not";
+            Rbtn_internar_not.Size = new Size(41, 21);
+            Rbtn_internar_not.TabIndex = 15;
+            Rbtn_internar_not.TabStop = true;
+            Rbtn_internar_not.Text = "no";
+            Rbtn_internar_not.UseVisualStyleBackColor = false;
+            // 
+            // Rbtn_internar_yes
+            // 
+            Rbtn_internar_yes.AutoSize = true;
+            Rbtn_internar_yes.BackColor = Color.Green;
+            Rbtn_internar_yes.Location = new Point(3, 3);
+            Rbtn_internar_yes.Name = "Rbtn_internar_yes";
+            Rbtn_internar_yes.Size = new Size(36, 21);
+            Rbtn_internar_yes.TabIndex = 14;
+            Rbtn_internar_yes.TabStop = true;
+            Rbtn_internar_yes.Text = "Si";
+            Rbtn_internar_yes.UseVisualStyleBackColor = false;
+            // 
+            // gb_internar
+            // 
+            gb_internar.Anchor = AnchorStyles.None;
+            gb_internar.BackColor = Color.Transparent;
+            gb_internar.BackgroundImageLayout = ImageLayout.None;
+            gb_internar.Controls.Add(Rbtn_internar_not);
+            gb_internar.Controls.Add(Rbtn_internar_yes);
+            gb_internar.FlatStyle = FlatStyle.Flat;
+            gb_internar.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            gb_internar.ForeColor = Color.Transparent;
+            gb_internar.ImeMode = ImeMode.Off;
+            gb_internar.Location = new Point(484, 9);
+            gb_internar.Margin = new Padding(0);
+            gb_internar.Name = "gb_internar";
+            gb_internar.Padding = new Padding(0);
+            gb_internar.Size = new Size(86, 27);
+            gb_internar.TabIndex = 21;
+            gb_internar.TabStop = false;
             // 
             // home
             // 
@@ -253,6 +339,9 @@
             BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
             BackgroundImageLayout = ImageLayout.Stretch;
             ClientSize = new Size(751, 577);
+            Controls.Add(gb_internar);
+            Controls.Add(lbl_doctor);
+            Controls.Add(lbl_name_doctor);
             Controls.Add(gb_dead);
             Controls.Add(lbl_dead);
             Controls.Add(lbl_inter);
@@ -276,6 +365,8 @@
             ((System.ComponentModel.ISupportInitialize)numericUpDown1).EndInit();
             gb_dead.ResumeLayout(false);
             gb_dead.PerformLayout();
+            gb_internar.ResumeLayout(false);
+            gb_internar.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -294,11 +385,17 @@
         private DateTimePicker dateTimePicker1;
         private TextBox txt_direccion;
         private Label lbl_direccion;
-        private RadioButton radioButton1;
         private RichTextBox richTextBox1;
         private Label lbl_diagnostico;
         private Label lbl_inter;
         private Label lbl_dead;
-        private GroupBox gb_dead;
+        private Label lbl_name_doctor;
+        private Label lbl_doctor;
+        public GroupBox gb_dead;
+        public RadioButton Rbtn_dead_not;
+        public RadioButton Rbtn_dead_yes;
+        public RadioButton Rbtn_internar_not;
+        public RadioButton Rbtn_internar_yes;
+        public GroupBox gb_internar;
     }
 }

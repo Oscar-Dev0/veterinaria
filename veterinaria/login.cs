@@ -24,27 +24,17 @@ namespace veterinaria
 
 
             //hacemos la funcion
-            if("root" == user && "root" == passwort)
+            if(("root" == user && "root" == passwort) || (user == dato_user && passwort == dato_passwort))
             {
-                var home = new home();
+                var home = new home(user);
                 this.Hide();
 
                 home.ShowDialog();
                 this.Dispose(true);
-            } else
-            if (user != dato_user || passwort != dato_passwort)
-            {
+            } else {
                 MessageBox.Show("Uno de los datos está mal puesto.", "Error", 0, MessageBoxIcon.Error);
                 return;
-            }
-            else
-            {
-                var home = new home();
-                this.Hide();
-
-                home.ShowDialog();
-                this.Dispose(true);
-            }
+            };
 
 
 
