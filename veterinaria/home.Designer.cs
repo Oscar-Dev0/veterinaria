@@ -215,7 +215,7 @@
             lbl_inter.BackColor = SystemColors.ControlDarkDark;
             lbl_inter.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
             lbl_inter.ForeColor = SystemColors.Control;
-            lbl_inter.Location = new Point(383, 11);
+            lbl_inter.Location = new Point(515, 39);
             lbl_inter.Name = "lbl_inter";
             lbl_inter.Size = new Size(85, 25);
             lbl_inter.TabIndex = 17;
@@ -227,11 +227,11 @@
             lbl_dead.BackColor = SystemColors.ControlDarkDark;
             lbl_dead.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
             lbl_dead.ForeColor = SystemColors.Control;
-            lbl_dead.Location = new Point(383, 104);
+            lbl_dead.Location = new Point(520, 107);
             lbl_dead.Name = "lbl_dead";
-            lbl_dead.Size = new Size(78, 25);
+            lbl_dead.Size = new Size(80, 25);
             lbl_dead.TabIndex = 18;
-            lbl_dead.Text = "Muerte";
+            lbl_dead.Text = "Muerto";
             // 
             // gb_dead
             // 
@@ -244,7 +244,7 @@
             gb_dead.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
             gb_dead.ForeColor = Color.Transparent;
             gb_dead.ImeMode = ImeMode.Off;
-            gb_dead.Location = new Point(484, 104);
+            gb_dead.Location = new Point(630, 104);
             gb_dead.Margin = new Padding(0);
             gb_dead.Name = "gb_dead";
             gb_dead.Padding = new Padding(0);
@@ -323,7 +323,7 @@
             gb_internar.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
             gb_internar.ForeColor = Color.Transparent;
             gb_internar.ImeMode = ImeMode.Off;
-            gb_internar.Location = new Point(484, 9);
+            gb_internar.Location = new Point(630, 39);
             gb_internar.Margin = new Padding(0);
             gb_internar.Name = "gb_internar";
             gb_internar.Padding = new Padding(0);
