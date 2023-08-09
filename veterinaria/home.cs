@@ -22,12 +22,32 @@ namespace veterinaria
         {
             CB_tipo_raza.Visible = true;
             lbl_tipo_raza.Visible = true;
-            var date_now = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
-            var date_pet = new DateTimeOffset(DTP_pet_ingreso.Value).ToUnixTimeMilliseconds();
+            CB_tipo_raza.Items.Clear();
 
-            var date_unix = date_pet - date_now;
+            var pet = CB_pet.Text.ToString().ToLower();
+            switch (pet)
+            {
+                case "perro":
+                    CB_tipo_raza.Items.Add("ssd");
+                    break;
+            }
 
-            MessageBox.Show("" + date_unix);
         }
+
+        public int CalculateDaysNumber(){
+
+            // Obtenemos los valores de la fecha y hora en milisegundos desde el inicio del tiempo Unix.
+            var currentUnixTime = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
+            var petDateUnixTime = new DateTimeOffset(DTP_pet_ingreso.Value).ToUnixTimeMilliseconds();
+
+            // Calculamos la diferencia en milisegundos entre las dos fechas.
+            var dateDifferenceMillis = petDateUnixTime - currentUnixTime;
+
+            // Redondeamos hacia abajo para obtener el número de días completos.
+            var roundedDays = (int)Math.Floor((decimal)dateDifferenceMillis / (1000 * 60 * 60 * 24));
+
+            return roundedDays;
+        }
+
     }
 }
