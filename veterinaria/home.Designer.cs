@@ -132,9 +132,9 @@
             lbl_Type_Pet.ForeColor = SystemColors.Control;
             lbl_Type_Pet.Location = new Point(12, 186);
             lbl_Type_Pet.Name = "lbl_Type_Pet";
-            lbl_Type_Pet.Size = new Size(148, 25);
+            lbl_Type_Pet.Size = new Size(146, 25);
             lbl_Type_Pet.TabIndex = 8;
-            lbl_Type_Pet.Text = "Tipo del animal";
+            lbl_Type_Pet.Text = "Tipo de Animal";
             // 
             // numericUpDown1
             // 
@@ -339,7 +339,7 @@
             CB_pet.Name = "CB_pet";
             CB_pet.Size = new Size(177, 23);
             CB_pet.TabIndex = 22;
-            CB_pet.Text = "Seleccionar raza";
+            CB_pet.Text = "Seleccionar tipo";
             CB_pet.SelectedIndexChanged += CB_pet_SelectedIndexChanged;
             // 
             // CB_tipo_raza
@@ -348,12 +348,11 @@
             CB_tipo_raza.FlatStyle = FlatStyle.Flat;
             CB_tipo_raza.ForeColor = SystemColors.Window;
             CB_tipo_raza.FormattingEnabled = true;
-            CB_tipo_raza.Items.AddRange(new object[] { "Perro", "Gato", "Perico", "Caballo" });
             CB_tipo_raza.Location = new Point(225, 214);
             CB_tipo_raza.Name = "CB_tipo_raza";
             CB_tipo_raza.Size = new Size(177, 23);
             CB_tipo_raza.TabIndex = 24;
-            CB_tipo_raza.Text = "Seleccionar Tipo de Raza";
+            CB_tipo_raza.Text = "Seleccionar Raza";
             CB_tipo_raza.Visible = false;
             // 
             // lbl_tipo_raza
@@ -364,9 +363,9 @@
             lbl_tipo_raza.ForeColor = SystemColors.Control;
             lbl_tipo_raza.Location = new Point(225, 186);
             lbl_tipo_raza.Name = "lbl_tipo_raza";
-            lbl_tipo_raza.Size = new Size(121, 25);
+            lbl_tipo_raza.Size = new Size(125, 25);
             lbl_tipo_raza.TabIndex = 23;
-            lbl_tipo_raza.Text = "Tipo de raza";
+            lbl_tipo_raza.Text = "Tipo de Raza";
             lbl_tipo_raza.Visible = false;
             // 
             // home
