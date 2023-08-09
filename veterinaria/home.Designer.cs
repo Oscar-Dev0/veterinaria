@@ -35,10 +35,9 @@
             txt_Name_Pet = new TextBox();
             lbl_date = new Label();
             lbl_year_animal = new Label();
-            txt_Raza = new TextBox();
-            lbl_raza = new Label();
+            lbl_Type_Pet = new Label();
             numericUpDown1 = new NumericUpDown();
-            dateTimePicker1 = new DateTimePicker();
+            DTP_pet_ingreso = new DateTimePicker();
             txt_direccion = new TextBox();
             lbl_direccion = new Label();
             Rbtn_dead_yes = new RadioButton();
@@ -53,6 +52,9 @@
             Rbtn_internar_not = new RadioButton();
             Rbtn_internar_yes = new RadioButton();
             gb_internar = new GroupBox();
+            CB_pet = new ComboBox();
+            CB_tipo_raza = new ComboBox();
+            lbl_tipo_raza = new Label();
             ((System.ComponentModel.ISupportInitialize)numericUpDown1).BeginInit();
             gb_dead.SuspendLayout();
             gb_internar.SuspendLayout();
@@ -122,24 +124,17 @@
             lbl_year_animal.TabIndex = 6;
             lbl_year_animal.Text = "Edad del animal";
             // 
-            // txt_Raza
+            // lbl_Type_Pet
             // 
-            txt_Raza.Location = new Point(12, 214);
-            txt_Raza.Name = "txt_Raza";
-            txt_Raza.Size = new Size(177, 23);
-            txt_Raza.TabIndex = 9;
-            // 
-            // lbl_raza
-            // 
-            lbl_raza.AutoSize = true;
-            lbl_raza.BackColor = SystemColors.ControlDarkDark;
-            lbl_raza.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
-            lbl_raza.ForeColor = SystemColors.Control;
-            lbl_raza.Location = new Point(12, 186);
-            lbl_raza.Name = "lbl_raza";
-            lbl_raza.Size = new Size(149, 25);
-            lbl_raza.TabIndex = 8;
-            lbl_raza.Text = "Raza del animal";
+            lbl_Type_Pet.AutoSize = true;
+            lbl_Type_Pet.BackColor = SystemColors.ControlDarkDark;
+            lbl_Type_Pet.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
+            lbl_Type_Pet.ForeColor = SystemColors.Control;
+            lbl_Type_Pet.Location = new Point(12, 186);
+            lbl_Type_Pet.Name = "lbl_Type_Pet";
+            lbl_Type_Pet.Size = new Size(148, 25);
+            lbl_Type_Pet.TabIndex = 8;
+            lbl_Type_Pet.Text = "Tipo del animal";
             // 
             // numericUpDown1
             // 
@@ -148,15 +143,15 @@
             numericUpDown1.Size = new Size(52, 23);
             numericUpDown1.TabIndex = 10;
             // 
-            // dateTimePicker1
+            // DTP_pet_ingreso
             // 
-            dateTimePicker1.CustomFormat = "";
-            dateTimePicker1.Format = DateTimePickerFormat.Short;
-            dateTimePicker1.ImeMode = ImeMode.On;
-            dateTimePicker1.Location = new Point(12, 376);
-            dateTimePicker1.Name = "dateTimePicker1";
-            dateTimePicker1.Size = new Size(84, 23);
-            dateTimePicker1.TabIndex = 11;
+            DTP_pet_ingreso.CustomFormat = "";
+            DTP_pet_ingreso.Format = DateTimePickerFormat.Short;
+            DTP_pet_ingreso.ImeMode = ImeMode.On;
+            DTP_pet_ingreso.Location = new Point(12, 376);
+            DTP_pet_ingreso.Name = "DTP_pet_ingreso";
+            DTP_pet_ingreso.Size = new Size(84, 23);
+            DTP_pet_ingreso.TabIndex = 11;
             // 
             // txt_direccion
             // 
@@ -179,6 +174,7 @@
             // 
             // Rbtn_dead_yes
             // 
+            Rbtn_dead_yes.AutoCheck = false;
             Rbtn_dead_yes.AutoSize = true;
             Rbtn_dead_yes.BackColor = Color.Green;
             Rbtn_dead_yes.Location = new Point(3, 3);
@@ -302,6 +298,7 @@
             // 
             // Rbtn_internar_yes
             // 
+            Rbtn_internar_yes.AutoCheck = false;
             Rbtn_internar_yes.AutoSize = true;
             Rbtn_internar_yes.BackColor = Color.Green;
             Rbtn_internar_yes.Location = new Point(3, 3);
@@ -331,6 +328,47 @@
             gb_internar.TabIndex = 21;
             gb_internar.TabStop = false;
             // 
+            // CB_pet
+            // 
+            CB_pet.BackColor = SystemColors.MenuText;
+            CB_pet.FlatStyle = FlatStyle.Flat;
+            CB_pet.ForeColor = SystemColors.Window;
+            CB_pet.FormattingEnabled = true;
+            CB_pet.Items.AddRange(new object[] { "Perro", "Gato", "Perico", "Caballo" });
+            CB_pet.Location = new Point(12, 214);
+            CB_pet.Name = "CB_pet";
+            CB_pet.Size = new Size(177, 23);
+            CB_pet.TabIndex = 22;
+            CB_pet.Text = "Seleccionar raza";
+            CB_pet.SelectedIndexChanged += CB_pet_SelectedIndexChanged;
+            // 
+            // CB_tipo_raza
+            // 
+            CB_tipo_raza.BackColor = SystemColors.MenuText;
+            CB_tipo_raza.FlatStyle = FlatStyle.Flat;
+            CB_tipo_raza.ForeColor = SystemColors.Window;
+            CB_tipo_raza.FormattingEnabled = true;
+            CB_tipo_raza.Items.AddRange(new object[] { "Perro", "Gato", "Perico", "Caballo" });
+            CB_tipo_raza.Location = new Point(225, 214);
+            CB_tipo_raza.Name = "CB_tipo_raza";
+            CB_tipo_raza.Size = new Size(177, 23);
+            CB_tipo_raza.TabIndex = 24;
+            CB_tipo_raza.Text = "Seleccionar Tipo de Raza";
+            CB_tipo_raza.Visible = false;
+            // 
+            // lbl_tipo_raza
+            // 
+            lbl_tipo_raza.AutoSize = true;
+            lbl_tipo_raza.BackColor = SystemColors.ControlDarkDark;
+            lbl_tipo_raza.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
+            lbl_tipo_raza.ForeColor = SystemColors.Control;
+            lbl_tipo_raza.Location = new Point(225, 186);
+            lbl_tipo_raza.Name = "lbl_tipo_raza";
+            lbl_tipo_raza.Size = new Size(121, 25);
+            lbl_tipo_raza.TabIndex = 23;
+            lbl_tipo_raza.Text = "Tipo de raza";
+            lbl_tipo_raza.Visible = false;
+            // 
             // home
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -339,6 +377,9 @@
             BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
             BackgroundImageLayout = ImageLayout.Stretch;
             ClientSize = new Size(751, 577);
+            Controls.Add(CB_tipo_raza);
+            Controls.Add(lbl_tipo_raza);
+            Controls.Add(CB_pet);
             Controls.Add(gb_internar);
             Controls.Add(lbl_doctor);
             Controls.Add(lbl_name_doctor);
@@ -349,10 +390,9 @@
             Controls.Add(richTextBox1);
             Controls.Add(txt_direccion);
             Controls.Add(lbl_direccion);
-            Controls.Add(dateTimePicker1);
+            Controls.Add(DTP_pet_ingreso);
             Controls.Add(numericUpDown1);
-            Controls.Add(txt_Raza);
-            Controls.Add(lbl_raza);
+            Controls.Add(lbl_Type_Pet);
             Controls.Add(lbl_year_animal);
             Controls.Add(lbl_date);
             Controls.Add(txt_Name_Pet);
@@ -379,10 +419,9 @@
         private TextBox txt_Name_Pet;
         private Label lbl_date;
         private Label lbl_year_animal;
-        private TextBox txt_Raza;
-        private Label lbl_raza;
+        private Label lbl_Type_Pet;
         private NumericUpDown numericUpDown1;
-        private DateTimePicker dateTimePicker1;
+        private DateTimePicker DTP_pet_ingreso;
         private TextBox txt_direccion;
         private Label lbl_direccion;
         private RichTextBox richTextBox1;
@@ -397,5 +436,8 @@
         public RadioButton Rbtn_internar_not;
         public RadioButton Rbtn_internar_yes;
         public GroupBox gb_internar;
+        private ComboBox CB_pet;
+        private ComboBox CB_tipo_raza;
+        private Label lbl_tipo_raza;
     }
 }
