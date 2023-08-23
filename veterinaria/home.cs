@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.VisualBasic.ApplicationServices;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -37,22 +38,23 @@ namespace veterinaria
 
         }
 
-        public int CalculateDaysNumber(){
+        /// <summary>
+        /// Calcula el número de días entre la fecha y hora actual y una fecha de ingreso de mascota especificada.
+        /// </summary>
+        /// <returns>El número de días entre la fecha y hora actual y la fecha de ingreso de la mascota.</returns>
+        public int CalcularNumeroDias()
+        {
+            // Obtener la fecha y hora actual y fecha Ingreso de la Mascota.
+            DateTime actual = DateTime.Now;
+            DateTime fechaIngresoMascota = DTP_pet_ingreso.Value;
 
-            // Obtenemos los valores de la fecha y hora en milisegundos desde el inicio del tiempo Unix.
-            var current = DateTime.Now;
-            var petDate = DTP_pet_ingreso.Value;
+            // Calcular la diferencia en días entre las dos fechas.
+            TimeSpan diferenciaFechas = actual - fechaIngresoMascota;
 
-            // Calculamos la diferencia en milisegundos entre las dos fechas.
-            var dateDifference = current - petDate;
+            int diasRedondeados = diferenciaFechas.Days;
 
-
-            var roundedDays = dateDifference.Days;
-
-            return roundedDays;
+            return diasRedondeados;
         }
-
-
 
 
 
