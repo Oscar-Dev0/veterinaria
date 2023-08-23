@@ -20,9 +20,12 @@ namespace veterinaria
 
         private void CB_pet_SelectedIndexChanged(object sender, EventArgs e)
         {
+
+            MessageBox.Show(CalculateDaysNumber().ToString());
             CB_tipo_raza.Visible = true;
             lbl_tipo_raza.Visible = true;
             CB_tipo_raza.Items.Clear();
+
 
             var pet = CB_pet.Text.ToString().ToLower();
             switch (pet)
@@ -37,17 +40,21 @@ namespace veterinaria
         public int CalculateDaysNumber(){
 
             // Obtenemos los valores de la fecha y hora en milisegundos desde el inicio del tiempo Unix.
-            var currentUnixTime = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
-            var petDateUnixTime = new DateTimeOffset(DTP_pet_ingreso.Value).ToUnixTimeMilliseconds();
+            var current = DateTime.Now;
+            var petDate = DTP_pet_ingreso.Value;
 
             // Calculamos la diferencia en milisegundos entre las dos fechas.
-            var dateDifferenceMillis = petDateUnixTime - currentUnixTime;
+            var dateDifference = current - petDate;
 
-            // Redondeamos hacia abajo para obtener el número de días completos.
-            var roundedDays = (int)Math.Floor((decimal)dateDifferenceMillis / (1000 * 60 * 60 * 24));
+
+            var roundedDays = dateDifference.Days;
 
             return roundedDays;
         }
+
+
+
+
 
     }
 }
