@@ -49,6 +49,7 @@
             text_passwort.Font = new Font("Microsoft Sans Serif", 11.9999981F, FontStyle.Regular, GraphicsUnit.Point);
             text_passwort.Location = new Point(138, 168);
             text_passwort.Name = "text_passwort";
+            text_passwort.PasswordChar = '*';
             text_passwort.Size = new Size(100, 26);
             text_passwort.TabIndex = 1;
             // 

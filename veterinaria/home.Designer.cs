@@ -29,57 +29,62 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(home));
-            lbl_Dueno = new Label();
-            txt_Dueno = new TextBox();
+            lbl_Owner = new Label();
+            txt_Owner = new TextBox();
             lbl_Name_pet = new Label();
             txt_Name_Pet = new TextBox();
             lbl_date = new Label();
             lbl_year_animal = new Label();
             lbl_Type_Pet = new Label();
-            numericUpDown1 = new NumericUpDown();
+            num_year = new NumericUpDown();
             DTP_pet_ingreso = new DateTimePicker();
             txt_direccion = new TextBox();
             lbl_direccion = new Label();
-            Rbtn_dead_yes = new RadioButton();
-            richTextBox1 = new RichTextBox();
+            rtb_diagnostico = new RichTextBox();
             lbl_diagnostico = new Label();
             lbl_inter = new Label();
             lbl_dead = new Label();
             gb_dead = new GroupBox();
+            Rbtn_dead_yes = new RadioButton();
             Rbtn_dead_not = new RadioButton();
             lbl_name_doctor = new Label();
             lbl_doctor = new Label();
+            gb_internar = new GroupBox();
             Rbtn_internar_not = new RadioButton();
             Rbtn_internar_yes = new RadioButton();
-            gb_internar = new GroupBox();
             CB_pet = new ComboBox();
             CB_tipo_raza = new ComboBox();
             lbl_tipo_raza = new Label();
-            ((System.ComponentModel.ISupportInitialize)numericUpDown1).BeginInit();
+            btn_save = new Button();
+            btn_leave = new Button();
+            btn_delete = new Button();
+            lbl_total_text = new Label();
+            lbl_total_title = new Label();
+            ((System.ComponentModel.ISupportInitialize)num_year).BeginInit();
             gb_dead.SuspendLayout();
             gb_internar.SuspendLayout();
             SuspendLayout();
             // 
-            // lbl_Dueno
+            // lbl_Owner
             // 
-            lbl_Dueno.AutoSize = true;
-            lbl_Dueno.BackColor = SystemColors.ControlDarkDark;
-            lbl_Dueno.BorderStyle = BorderStyle.FixedSingle;
-            lbl_Dueno.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
-            lbl_Dueno.ForeColor = SystemColors.ButtonFace;
-            lbl_Dueno.Location = new Point(12, 9);
-            lbl_Dueno.Name = "lbl_Dueno";
-            lbl_Dueno.Size = new Size(185, 27);
-            lbl_Dueno.TabIndex = 0;
-            lbl_Dueno.Text = "Nombre del Dueño";
+            lbl_Owner.AutoSize = true;
+            lbl_Owner.BackColor = SystemColors.ControlDarkDark;
+            lbl_Owner.BorderStyle = BorderStyle.FixedSingle;
+            lbl_Owner.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
+            lbl_Owner.ForeColor = SystemColors.ButtonFace;
+            lbl_Owner.Location = new Point(12, 9);
+            lbl_Owner.Name = "lbl_Owner";
+            lbl_Owner.Size = new Size(185, 27);
+            lbl_Owner.TabIndex = 0;
+            lbl_Owner.Text = "Nombre del Dueño";
             // 
-            // txt_Dueno
+            // txt_Owner
             // 
-            txt_Dueno.ForeColor = SystemColors.InfoText;
-            txt_Dueno.Location = new Point(12, 39);
-            txt_Dueno.Name = "txt_Dueno";
-            txt_Dueno.Size = new Size(184, 23);
-            txt_Dueno.TabIndex = 1;
+            txt_Owner.ForeColor = SystemColors.InfoText;
+            txt_Owner.Location = new Point(12, 39);
+            txt_Owner.Name = "txt_Owner";
+            txt_Owner.Size = new Size(184, 23);
+            txt_Owner.TabIndex = 1;
             // 
             // lbl_Name_pet
             // 
@@ -136,12 +141,12 @@
             lbl_Type_Pet.TabIndex = 8;
             lbl_Type_Pet.Text = "Tipo de Animal";
             // 
-            // numericUpDown1
+            // num_year
             // 
-            numericUpDown1.Location = new Point(12, 291);
-            numericUpDown1.Name = "numericUpDown1";
-            numericUpDown1.Size = new Size(52, 23);
-            numericUpDown1.TabIndex = 10;
+            num_year.Location = new Point(12, 291);
+            num_year.Name = "num_year";
+            num_year.Size = new Size(52, 23);
+            num_year.TabIndex = 10;
             // 
             // DTP_pet_ingreso
             // 
@@ -172,26 +177,13 @@
             lbl_direccion.TabIndex = 12;
             lbl_direccion.Text = "Direccion del paciente";
             // 
-            // Rbtn_dead_yes
+            // rtb_diagnostico
             // 
-            Rbtn_dead_yes.AutoCheck = false;
-            Rbtn_dead_yes.AutoSize = true;
-            Rbtn_dead_yes.BackColor = Color.Green;
-            Rbtn_dead_yes.Location = new Point(3, 3);
-            Rbtn_dead_yes.Name = "Rbtn_dead_yes";
-            Rbtn_dead_yes.Size = new Size(36, 21);
-            Rbtn_dead_yes.TabIndex = 14;
-            Rbtn_dead_yes.TabStop = true;
-            Rbtn_dead_yes.Text = "Si";
-            Rbtn_dead_yes.UseVisualStyleBackColor = false;
-            // 
-            // richTextBox1
-            // 
-            richTextBox1.Location = new Point(531, 368);
-            richTextBox1.Name = "richTextBox1";
-            richTextBox1.Size = new Size(208, 197);
-            richTextBox1.TabIndex = 15;
-            richTextBox1.Text = "";
+            rtb_diagnostico.Location = new Point(531, 368);
+            rtb_diagnostico.Name = "rtb_diagnostico";
+            rtb_diagnostico.Size = new Size(208, 197);
+            rtb_diagnostico.TabIndex = 15;
+            rtb_diagnostico.Text = "";
             // 
             // lbl_diagnostico
             // 
@@ -234,8 +226,8 @@
             gb_dead.Anchor = AnchorStyles.None;
             gb_dead.BackColor = Color.Transparent;
             gb_dead.BackgroundImageLayout = ImageLayout.None;
-            gb_dead.Controls.Add(Rbtn_dead_not);
             gb_dead.Controls.Add(Rbtn_dead_yes);
+            gb_dead.Controls.Add(Rbtn_dead_not);
             gb_dead.FlatStyle = FlatStyle.Flat;
             gb_dead.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
             gb_dead.ForeColor = Color.Transparent;
@@ -248,10 +240,23 @@
             gb_dead.TabIndex = 0;
             gb_dead.TabStop = false;
             // 
+            // Rbtn_dead_yes
+            // 
+            Rbtn_dead_yes.AutoSize = true;
+            Rbtn_dead_yes.BackColor = Color.Green;
+            Rbtn_dead_yes.Cursor = Cursors.Hand;
+            Rbtn_dead_yes.Location = new Point(3, 3);
+            Rbtn_dead_yes.Name = "Rbtn_dead_yes";
+            Rbtn_dead_yes.Size = new Size(36, 21);
+            Rbtn_dead_yes.TabIndex = 16;
+            Rbtn_dead_yes.Text = "Si";
+            Rbtn_dead_yes.UseVisualStyleBackColor = false;
+            // 
             // Rbtn_dead_not
             // 
             Rbtn_dead_not.AutoSize = true;
             Rbtn_dead_not.BackColor = Color.Red;
+            Rbtn_dead_not.Cursor = Cursors.Hand;
             Rbtn_dead_not.Location = new Point(45, 3);
             Rbtn_dead_not.Name = "Rbtn_dead_not";
             Rbtn_dead_not.Size = new Size(41, 21);
@@ -284,29 +289,6 @@
             lbl_doctor.TabIndex = 20;
             lbl_doctor.Text = "%Name%";
             // 
-            // Rbtn_internar_not
-            // 
-            Rbtn_internar_not.AutoSize = true;
-            Rbtn_internar_not.BackColor = Color.Red;
-            Rbtn_internar_not.Location = new Point(47, 3);
-            Rbtn_internar_not.Name = "Rbtn_internar_not";
-            Rbtn_internar_not.Size = new Size(41, 21);
-            Rbtn_internar_not.TabIndex = 15;
-            Rbtn_internar_not.Text = "no";
-            Rbtn_internar_not.UseVisualStyleBackColor = false;
-            // 
-            // Rbtn_internar_yes
-            // 
-            Rbtn_internar_yes.AutoSize = true;
-            Rbtn_internar_yes.BackColor = Color.Green;
-            Rbtn_internar_yes.Cursor = Cursors.Hand;
-            Rbtn_internar_yes.Location = new Point(3, 3);
-            Rbtn_internar_yes.Name = "Rbtn_internar_yes";
-            Rbtn_internar_yes.Size = new Size(36, 21);
-            Rbtn_internar_yes.TabIndex = 14;
-            Rbtn_internar_yes.Text = "Si";
-            Rbtn_internar_yes.UseVisualStyleBackColor = false;
-            // 
             // gb_internar
             // 
             gb_internar.Anchor = AnchorStyles.None;
@@ -325,6 +307,31 @@
             gb_internar.Size = new Size(86, 27);
             gb_internar.TabIndex = 21;
             gb_internar.TabStop = false;
+            // 
+            // Rbtn_internar_not
+            // 
+            Rbtn_internar_not.AutoSize = true;
+            Rbtn_internar_not.BackColor = Color.Red;
+            Rbtn_internar_not.Cursor = Cursors.Hand;
+            Rbtn_internar_not.Location = new Point(47, 4);
+            Rbtn_internar_not.Name = "Rbtn_internar_not";
+            Rbtn_internar_not.Size = new Size(41, 21);
+            Rbtn_internar_not.TabIndex = 17;
+            Rbtn_internar_not.TabStop = true;
+            Rbtn_internar_not.Text = "no";
+            Rbtn_internar_not.UseVisualStyleBackColor = false;
+            // 
+            // Rbtn_internar_yes
+            // 
+            Rbtn_internar_yes.AutoSize = true;
+            Rbtn_internar_yes.BackColor = Color.Green;
+            Rbtn_internar_yes.Cursor = Cursors.Hand;
+            Rbtn_internar_yes.Location = new Point(3, 3);
+            Rbtn_internar_yes.Name = "Rbtn_internar_yes";
+            Rbtn_internar_yes.Size = new Size(36, 21);
+            Rbtn_internar_yes.TabIndex = 14;
+            Rbtn_internar_yes.Text = "Si";
+            Rbtn_internar_yes.UseVisualStyleBackColor = false;
             // 
             // CB_pet
             // 
@@ -366,6 +373,71 @@
             lbl_tipo_raza.Text = "Tipo de Raza";
             lbl_tipo_raza.Visible = false;
             // 
+            // btn_save
+            // 
+            btn_save.BackColor = Color.Transparent;
+            btn_save.BackgroundImage = (Image)resources.GetObject("btn_save.BackgroundImage");
+            btn_save.BackgroundImageLayout = ImageLayout.Zoom;
+            btn_save.Cursor = Cursors.Hand;
+            btn_save.Location = new Point(267, 521);
+            btn_save.Name = "btn_save";
+            btn_save.Size = new Size(44, 44);
+            btn_save.TabIndex = 25;
+            btn_save.UseVisualStyleBackColor = false;
+            btn_save.Click += btn_save_Click;
+            // 
+            // btn_leave
+            // 
+            btn_leave.BackColor = Color.Transparent;
+            btn_leave.BackgroundImage = (Image)resources.GetObject("btn_leave.BackgroundImage");
+            btn_leave.BackgroundImageLayout = ImageLayout.Zoom;
+            btn_leave.Cursor = Cursors.Hand;
+            btn_leave.Location = new Point(365, 521);
+            btn_leave.Name = "btn_leave";
+            btn_leave.Size = new Size(48, 44);
+            btn_leave.TabIndex = 26;
+            btn_leave.UseVisualStyleBackColor = false;
+            btn_leave.Click += btn_leave_Click;
+            // 
+            // btn_delete
+            // 
+            btn_delete.BackColor = Color.Transparent;
+            btn_delete.BackgroundImage = (Image)resources.GetObject("btn_delete.BackgroundImage");
+            btn_delete.BackgroundImageLayout = ImageLayout.Zoom;
+            btn_delete.Cursor = Cursors.Hand;
+            btn_delete.Location = new Point(317, 521);
+            btn_delete.Name = "btn_delete";
+            btn_delete.Size = new Size(42, 44);
+            btn_delete.TabIndex = 27;
+            btn_delete.UseVisualStyleBackColor = false;
+            btn_delete.Click += btn_delete_Click;
+            // 
+            // lbl_total_text
+            // 
+            lbl_total_text.AutoSize = true;
+            lbl_total_text.BackColor = SystemColors.ControlDarkDark;
+            lbl_total_text.BorderStyle = BorderStyle.FixedSingle;
+            lbl_total_text.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
+            lbl_total_text.ForeColor = SystemColors.ButtonFace;
+            lbl_total_text.Location = new Point(302, 9);
+            lbl_total_text.Name = "lbl_total_text";
+            lbl_total_text.Size = new Size(89, 27);
+            lbl_total_text.TabIndex = 28;
+            lbl_total_text.Text = "%Total%";
+            // 
+            // lbl_total_title
+            // 
+            lbl_total_title.AutoSize = true;
+            lbl_total_title.BackColor = SystemColors.ControlDarkDark;
+            lbl_total_title.BorderStyle = BorderStyle.FixedSingle;
+            lbl_total_title.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
+            lbl_total_title.ForeColor = SystemColors.ButtonFace;
+            lbl_total_title.Location = new Point(239, 9);
+            lbl_total_title.Name = "lbl_total_title";
+            lbl_total_title.Size = new Size(62, 27);
+            lbl_total_title.TabIndex = 29;
+            lbl_total_title.Text = "Total:";
+            // 
             // home
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -374,6 +446,11 @@
             BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
             BackgroundImageLayout = ImageLayout.Stretch;
             ClientSize = new Size(751, 577);
+            Controls.Add(lbl_total_title);
+            Controls.Add(lbl_total_text);
+            Controls.Add(btn_delete);
+            Controls.Add(btn_leave);
+            Controls.Add(btn_save);
             Controls.Add(CB_tipo_raza);
             Controls.Add(lbl_tipo_raza);
             Controls.Add(CB_pet);
@@ -384,22 +461,23 @@
             Controls.Add(lbl_dead);
             Controls.Add(lbl_inter);
             Controls.Add(lbl_diagnostico);
-            Controls.Add(richTextBox1);
+            Controls.Add(rtb_diagnostico);
             Controls.Add(txt_direccion);
             Controls.Add(lbl_direccion);
             Controls.Add(DTP_pet_ingreso);
-            Controls.Add(numericUpDown1);
+            Controls.Add(num_year);
             Controls.Add(lbl_Type_Pet);
             Controls.Add(lbl_year_animal);
             Controls.Add(lbl_date);
             Controls.Add(txt_Name_Pet);
             Controls.Add(lbl_Name_pet);
-            Controls.Add(txt_Dueno);
-            Controls.Add(lbl_Dueno);
+            Controls.Add(txt_Owner);
+            Controls.Add(lbl_Owner);
             Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "home";
             Text = "home";
-            ((System.ComponentModel.ISupportInitialize)numericUpDown1).EndInit();
+            Load += home_Load;
+            ((System.ComponentModel.ISupportInitialize)num_year).EndInit();
             gb_dead.ResumeLayout(false);
             gb_dead.PerformLayout();
             gb_internar.ResumeLayout(false);
@@ -410,18 +488,18 @@
 
         #endregion
 
-        private Label lbl_Dueno;
-        private TextBox txt_Dueno;
+        private Label lbl_Owner;
+        private TextBox txt_Owner;
         private Label lbl_Name_pet;
         private TextBox txt_Name_Pet;
         private Label lbl_date;
         private Label lbl_year_animal;
         private Label lbl_Type_Pet;
-        private NumericUpDown numericUpDown1;
+        private NumericUpDown num_year;
         private DateTimePicker DTP_pet_ingreso;
         private TextBox txt_direccion;
         private Label lbl_direccion;
-        private RichTextBox richTextBox1;
+        private RichTextBox rtb_diagnostico;
         private Label lbl_diagnostico;
         private Label lbl_inter;
         private Label lbl_dead;
@@ -429,12 +507,17 @@
         private Label lbl_doctor;
         public GroupBox gb_dead;
         public RadioButton Rbtn_dead_not;
-        public RadioButton Rbtn_dead_yes;
-        public RadioButton Rbtn_internar_not;
-        public RadioButton Rbtn_internar_yes;
         public GroupBox gb_internar;
         private ComboBox CB_pet;
         private ComboBox CB_tipo_raza;
         private Label lbl_tipo_raza;
+        public RadioButton Rbtn_internar_yes;
+        public RadioButton Rbtn_dead_yes;
+        private Button btn_save;
+        private Button btn_leave;
+        private Button btn_delete;
+        private Label lbl_total_text;
+        private Label lbl_total_title;
+        public RadioButton Rbtn_internar_not;
     }
 }
