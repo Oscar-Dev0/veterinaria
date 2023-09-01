@@ -13,16 +13,27 @@ namespace veterinaria
 {
     public partial class home : Form
     {
+
         public home(string doctor)
         {
             InitializeComponent();
-            lbl_doctor.Text = doctor;
+            if (doctor == "root")
+            {
+                lbl_doctor.Text = "Administración";
+            }
+            else if (doctor == "doctor_1")
+            {
+                lbl_doctor.Text = "Oscar Pérez";
+            }
+            else
+            {
+                lbl_doctor.Text = doctor;
+            };
+
         }
 
         private void CB_pet_SelectedIndexChanged(object sender, EventArgs e)
         {
-
-            MessageBox.Show(CalculateDaysNumber().ToString());
             CB_tipo_raza.Visible = true;
             lbl_tipo_raza.Visible = true;
             CB_tipo_raza.Items.Clear();

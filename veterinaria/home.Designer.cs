@@ -292,20 +292,18 @@
             Rbtn_internar_not.Name = "Rbtn_internar_not";
             Rbtn_internar_not.Size = new Size(41, 21);
             Rbtn_internar_not.TabIndex = 15;
-            Rbtn_internar_not.TabStop = true;
             Rbtn_internar_not.Text = "no";
             Rbtn_internar_not.UseVisualStyleBackColor = false;
             // 
             // Rbtn_internar_yes
             // 
-            Rbtn_internar_yes.AutoCheck = false;
             Rbtn_internar_yes.AutoSize = true;
             Rbtn_internar_yes.BackColor = Color.Green;
+            Rbtn_internar_yes.Cursor = Cursors.Hand;
             Rbtn_internar_yes.Location = new Point(3, 3);
             Rbtn_internar_yes.Name = "Rbtn_internar_yes";
             Rbtn_internar_yes.Size = new Size(36, 21);
             Rbtn_internar_yes.TabIndex = 14;
-            Rbtn_internar_yes.TabStop = true;
             Rbtn_internar_yes.Text = "Si";
             Rbtn_internar_yes.UseVisualStyleBackColor = false;
             // 
