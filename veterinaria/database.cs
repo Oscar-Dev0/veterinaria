@@ -56,8 +56,6 @@ namespace veterinaria
             return usuarios;
         }
 
-
-
     }
 
     class Usuario
