@@ -15,22 +15,15 @@ namespace veterinaria
 {
     public partial class home : Form
     {
-
-        public home(string doctor)
+        Database database;
+        public home(string doctor, object s)
         {
             InitializeComponent();
-            if (doctor == "root")
-            {
-                lbl_doctor.Text = "Administración";
-            }
-            else if (doctor == "doctor_1")
-            {
-                lbl_doctor.Text = "Oscar Pérez";
-            }
-            else
-            {
-                lbl_doctor.Text = doctor;
-            };
+            database = (Database)s;
+
+            var user_db = database.users().Find(x => x.Name == doctor);
+
+            lbl_doctor.Text = user_db != null ? user_db.DisplayName : "Undefined";
 
         }
 
@@ -118,7 +111,7 @@ namespace veterinaria
 
         private void btn_leave_Click(object sender, EventArgs e)
         {
-            var login = new Veterinaria_login();
+            var login = new Veterinaria_login(database);
             this.Hide();
 
             login.ShowDialog();

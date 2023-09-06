@@ -11,7 +11,9 @@ namespace veterinaria
             // To customize application configuration such as set high DPI settings or default font,
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
-            Application.Run(new Veterinaria_login());
+            var data = new Database();
+            data.Conection();
+            Application.Run(new Veterinaria_login(data));
         }
     }
 }

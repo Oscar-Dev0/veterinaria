@@ -2,9 +2,11 @@ namespace veterinaria
 {
     public partial class Veterinaria_login : Form
     {
-        public Veterinaria_login()
+        Database database;
+        public Veterinaria_login(object s)
         {
             InitializeComponent();
+            database = (Database)s;
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -14,19 +16,19 @@ namespace veterinaria
 
         private void button1_Click(object sender, EventArgs e)
         {
-            ///quemar los datos
-            string dato_user = "doctor_1";
-            string dato_passwort = "pets1304";
 
             //datos del usuario
             var user = text_user.Text;
             var passwort = text_passwort.Text;
 
+            // Sacamos la lista de usuario
+            var users = database.users();
+            var user_db = users.Find((s) => s.Name == user);
+            var user_b = user_db != null ? true : false;
 
             //hacemos la funcion
-            if (("root" == user && "root" == passwort) || (user == dato_user && passwort == dato_passwort))
-            {
-                var home = new home(user);
+            if(user_b) if (user_db?.Password == passwort) {
+                var home = new home(user, database);
                 this.Hide();
                 home.ShowDialog();
                 this.Dispose(true);
