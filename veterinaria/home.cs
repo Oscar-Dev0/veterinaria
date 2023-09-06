@@ -136,14 +136,11 @@ namespace veterinaria
            
             var total = 0;
 
-            if (dias < 2)
+            if (dias > 3)
             {
-                total = 5000;
+                total = 1500 * dias;
             }
-            else
-            {
-                total = 6000 * dias;
-            };
+            else total = 1500;
 
             return total.ToString();
         }

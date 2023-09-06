@@ -28,7 +28,6 @@ namespace veterinaria
             {
                 var home = new home(user);
                 this.Hide();
-
                 home.ShowDialog();
                 this.Dispose(true);
             }
