@@ -1,4 +1,5 @@
 ﻿using Microsoft.VisualBasic.ApplicationServices;
+using Microsoft.VisualBasic.Logging;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -11,6 +12,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using veterinaria.src.functions;
+using veterinaria.src.itf;
 using veterinaria.src.ITF;
 
 namespace veterinaria
@@ -124,7 +126,16 @@ namespace veterinaria
 
         private void btn_save_Click(object sender, EventArgs e)
         {
-            lbl_total_text.Text = Money();
+            var data = new ITF_Reporte();
+            data.diagnosis = rtb_diagnostico.Text;
+            data.stay_days = CalcularNumeroDias();
+            data.doctor = lbl_doctor.Text;
+            data.is_dead = Rbtn_dead_yes.Checked;
+            var reporte = new report(database, data);
+            this.Hide();
+
+            reporte.ShowDialog();
+            this.Dispose(true);
         }
 
         private string Money()
