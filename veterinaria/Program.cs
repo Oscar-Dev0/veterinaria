@@ -1,3 +1,5 @@
+using veterinaria.src.functions;
+
 namespace veterinaria
 {
     internal static class Program

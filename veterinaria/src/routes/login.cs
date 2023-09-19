@@ -1,3 +1,6 @@
+using veterinaria.src.functions;
+using veterinaria.src.ITF;
+
 namespace veterinaria
 {
     public partial class Veterinaria_login : Form
@@ -28,10 +31,15 @@ namespace veterinaria
 
             //hacemos la funcion
             if(user_b) if (user_db?.Password == passwort) {
-                var home = new home(user, database);
-                this.Hide();
-                home.ShowDialog();
-                this.Dispose(true);
+                    var data = new ITF_home
+                    {
+                        doctor = user
+                    };
+
+                    var home = new home(database, data);
+                    this.Hide();
+                    home.ShowDialog();
+                    this.Dispose(true);
             }
             else
             {

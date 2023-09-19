@@ -10,18 +10,22 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using veterinaria.src.functions;
+using veterinaria.src.ITF;
 
 namespace veterinaria
 {
     public partial class home : Form
     {
+ 
         Database database;
-        public home(string doctor, object s)
+        ITF_home data;
+        public home(object db, object dt)
         {
             InitializeComponent();
-            database = (Database)s;
-
-            var user_db = database.users().Find(x => x.Name == doctor);
+            database = (Database)db;
+            data = (ITF_home)dt;
+            var user_db = database.users().Find(x => x.Name == data.doctor);
 
             lbl_doctor.Text = user_db != null ? user_db.DisplayName : "Undefined";
 
