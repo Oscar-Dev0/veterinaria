@@ -42,6 +42,7 @@ namespace veterinaria
             var pet = CB_pet.Text.ToString().ToLower();
             switch (pet)
             {
+                case "conejo":
                 case "perro":
                     CB_tipo_raza.Items.Add("Doberman");
                     CB_tipo_raza.Items.Add("Labrador Retriever");
@@ -96,7 +97,7 @@ namespace veterinaria
 
         private void home_Load(object sender, EventArgs e)
         {
-            lbl_total_text.Text = "0";
+            lbl_total_text.Text = "₡ 0";
             DTP_pet_ingreso.MaxDate = DateTime.Today;
         }
 
@@ -131,6 +132,7 @@ namespace veterinaria
             data.stay_days = CalcularNumeroDias();
             data.doctor = lbl_doctor.Text;
             data.is_dead = Rbtn_dead_yes.Checked;
+            data.internship_money = Money();
             var reporte = new report(database, data);
             this.Hide();
 
@@ -138,19 +140,16 @@ namespace veterinaria
             this.Dispose(true);
         }
 
-        private string Money()
+        private int Money()
         {
             var dias = CalcularNumeroDias();
            
             var total = 0;
 
-            if (dias > 3)
-            {
-                total = 1500 * dias;
-            }
-            else total = 1500;
+            if (dias > 3) total = 15000 * (dias - 3);
+            else total = 7000; 
 
-            return total.ToString();
+            return total;
         }
 
     }

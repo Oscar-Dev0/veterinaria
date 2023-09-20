@@ -41,10 +41,10 @@
             CB_cremacion = new CheckBox();
             lbl_title_total = new Label();
             lbl_txt_total = new Label();
-            TB_days = new TextBox();
-            TB_costo = new TextBox();
             lbl_doctor = new Label();
             lbl_doctor_text = new Label();
+            lbl_day_text = new Label();
+            lbl_estancia_txt = new Label();
             SuspendLayout();
             // 
             // lbl_titulo
@@ -121,7 +121,6 @@
             // 
             // rtb_diagnostico
             // 
-            rtb_diagnostico.Enabled = false;
             rtb_diagnostico.Location = new Point(12, 292);
             rtb_diagnostico.Name = "rtb_diagnostico";
             rtb_diagnostico.Size = new Size(208, 61);
@@ -131,7 +130,6 @@
             // CB_dead
             // 
             CB_dead.AutoSize = true;
-            CB_dead.Enabled = false;
             CB_dead.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
             CB_dead.Location = new Point(247, 294);
             CB_dead.Name = "CB_dead";
@@ -143,7 +141,6 @@
             // CB_cremacion
             // 
             CB_cremacion.AutoSize = true;
-            CB_cremacion.Enabled = false;
             CB_cremacion.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
             CB_cremacion.Location = new Point(247, 332);
             CB_cremacion.Name = "CB_cremacion";
@@ -172,24 +169,6 @@
             lbl_txt_total.TabIndex = 20;
             lbl_txt_total.Text = "%$%";
             // 
-            // TB_days
-            // 
-            TB_days.Cursor = Cursors.No;
-            TB_days.Enabled = false;
-            TB_days.Location = new Point(180, 53);
-            TB_days.Name = "TB_days";
-            TB_days.Size = new Size(149, 23);
-            TB_days.TabIndex = 21;
-            // 
-            // TB_costo
-            // 
-            TB_costo.Cursor = Cursors.No;
-            TB_costo.Enabled = false;
-            TB_costo.Location = new Point(189, 82);
-            TB_costo.Name = "TB_costo";
-            TB_costo.Size = new Size(140, 23);
-            TB_costo.TabIndex = 22;
-            // 
             // lbl_doctor
             // 
             lbl_doctor.AutoSize = true;
@@ -203,12 +182,32 @@
             // lbl_doctor_text
             // 
             lbl_doctor_text.AutoSize = true;
-            lbl_doctor_text.Font = new Font("Arial Black", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            lbl_doctor_text.Font = new Font("Arial Black", 11F, FontStyle.Bold, GraphicsUnit.Point);
             lbl_doctor_text.Location = new Point(515, 79);
             lbl_doctor_text.Name = "lbl_doctor_text";
-            lbl_doctor_text.Size = new Size(53, 23);
+            lbl_doctor_text.Size = new Size(50, 22);
             lbl_doctor_text.TabIndex = 24;
             lbl_doctor_text.Text = "%$%";
+            // 
+            // lbl_day_text
+            // 
+            lbl_day_text.AutoSize = true;
+            lbl_day_text.Font = new Font("Arial Black", 11F, FontStyle.Bold, GraphicsUnit.Point);
+            lbl_day_text.Location = new Point(180, 57);
+            lbl_day_text.Name = "lbl_day_text";
+            lbl_day_text.Size = new Size(50, 22);
+            lbl_day_text.TabIndex = 25;
+            lbl_day_text.Text = "%$%";
+            // 
+            // lbl_estancia_txt
+            // 
+            lbl_estancia_txt.AutoSize = true;
+            lbl_estancia_txt.Font = new Font("Arial Black", 11F, FontStyle.Bold, GraphicsUnit.Point);
+            lbl_estancia_txt.Location = new Point(193, 80);
+            lbl_estancia_txt.Name = "lbl_estancia_txt";
+            lbl_estancia_txt.Size = new Size(50, 22);
+            lbl_estancia_txt.TabIndex = 26;
+            lbl_estancia_txt.Text = "%$%";
             // 
             // report
             // 
@@ -216,10 +215,10 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.AppWorkspace;
             ClientSize = new Size(689, 387);
+            Controls.Add(lbl_estancia_txt);
+            Controls.Add(lbl_day_text);
             Controls.Add(lbl_doctor_text);
             Controls.Add(lbl_doctor);
-            Controls.Add(TB_costo);
-            Controls.Add(TB_days);
             Controls.Add(lbl_txt_total);
             Controls.Add(lbl_title_total);
             Controls.Add(CB_cremacion);
@@ -253,9 +252,9 @@
         private CheckBox CB_cremacion;
         private Label lbl_title_total;
         private Label lbl_txt_total;
-        private TextBox TB_days;
-        private TextBox TB_costo;
         private Label lbl_doctor;
         private Label lbl_doctor_text;
+        private Label lbl_day_text;
+        private Label lbl_estancia_txt;
     }
 }
