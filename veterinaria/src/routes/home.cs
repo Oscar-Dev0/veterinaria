@@ -19,7 +19,7 @@ namespace veterinaria
 {
     public partial class home : Form
     {
-
+ 
         Database database;
         ITF_home data;
         public home(object db, object dt)
@@ -143,11 +143,11 @@ namespace veterinaria
         private int Money()
         {
             var dias = CalcularNumeroDias();
-
+           
             var total = 0;
 
             if (dias > 3) total = 15000 * (dias - 3);
-            else total = 7000;
+            else total = 7000; 
 
             return total;
         }
