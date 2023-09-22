@@ -26,9 +26,84 @@ namespace veterinaria
             CB_dead.Checked = data.is_dead;
             CB_dead.Enabled = !data.is_dead;
             lbl_day_text.Text = data.stay_days.ToString();
-            lbl_estancia_txt.Text = "₡ "+data.internship_money.ToString();
-            lbl_txt_total.Text = "0";
+            lbl_estancia_txt.Text = "₡ " + data.internship_money.ToString();
+            lbl_txt_total.Text = "₡ 0";
         }
 
+        private void btn_test_Click(object sender, EventArgs e)
+        {
+            var s = Money();
+            lbl_txt_total.Text = "₡ " + s.ToString();
+        }
+
+        private double Money()
+        {
+            return data.internship_money + MultiAnimal();
+        }
+        private double MultiAnimal()
+        {
+            var money = MoneyAnimal();
+            if(data.stay_days == 0) return money;
+
+            double total = money * data.stay_days;
+            return total;
+        }
+
+        private int MoneyAnimal()
+        {
+            var total = 0;
+            var vac = equals("Vacunacion");
+            var ali = equals("Alimentacion");
+            var ace = equals("Aceo");
+            switch (data.raza)
+            {
+                case "conejo":
+                    total = total + 2500;
+                    if (vac) total = total + 2500;
+                    if (ali) total = total + 1500;
+                    if (ace) total = total + 5000;
+                    break;
+                case "perro":
+                    total = total + 3200;
+                    if (vac) total = total + 3200;
+                    if (ali) total = total + 2000;
+                    if (ace) total = total + 2000;
+                    break;
+                case "gato":
+                    total = total + 3200;
+                    if (vac) total = total + 3200;
+                    if (ali) total = total + 2000;
+                    if (ace) total = total + 2000;
+                    break;
+                case "perico":
+                    total = total + 2500;
+                    if (vac) total = total + 2500;
+                    if (ali) total = total + 1500;
+                    if (ace) total = total + 5000;
+                    break;
+                case "caballo":
+                    total = total + 4800;
+                    if (vac) total = total + 4800;
+                    if (ali) total = total + 4000;
+                    if (ace) total = total + 15000;
+                    break;
+            };
+
+            return total;
+        }
+
+        private bool equals(string key)
+        {
+            try
+            {
+                var k = key.ToLower();
+                var tratamientosSeleccionados = CLBx_tratamiento.CheckedItems.Cast<string>().ToList();
+                return tratamientosSeleccionados.Select(x => x.ToString()).Any(x => x.ToLower() == k);
+            }
+            catch
+            {
+                return false;
+            };
+        }
     }
 }

@@ -43,6 +43,12 @@ namespace veterinaria
             switch (pet)
             {
                 case "conejo":
+                    CB_tipo_raza.Items.Add("Belier");
+                    CB_tipo_raza.Items.Add("Holanda enano");
+                    CB_tipo_raza.Items.Add("Teddy");
+                    CB_tipo_raza.Items.Add("Mini Lop");
+                    CB_tipo_raza.Items.Add("Flandes");
+                    break;
                 case "perro":
                     CB_tipo_raza.Items.Add("Doberman");
                     CB_tipo_raza.Items.Add("Labrador Retriever");
@@ -133,6 +139,7 @@ namespace veterinaria
             data.doctor = lbl_doctor.Text;
             data.is_dead = Rbtn_dead_yes.Checked;
             data.internship_money = Money();
+            data.raza = CB_pet.Text.ToString().ToLower();
             var reporte = new report(database, data);
             this.Hide();
 

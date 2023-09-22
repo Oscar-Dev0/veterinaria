@@ -345,7 +345,7 @@
             CB_pet.FlatStyle = FlatStyle.Flat;
             CB_pet.ForeColor = SystemColors.Window;
             CB_pet.FormattingEnabled = true;
-            CB_pet.Items.AddRange(new object[] { "Perro", "Gato", "Perico", "Caballo" });
+            CB_pet.Items.AddRange(new object[] { "Perro", "Gato", "Perico", "Caballo", "Conejo" });
             CB_pet.Location = new Point(12, 214);
             CB_pet.Name = "CB_pet";
             CB_pet.Size = new Size(177, 23);

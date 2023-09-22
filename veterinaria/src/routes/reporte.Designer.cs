@@ -45,6 +45,7 @@
             lbl_doctor_text = new Label();
             lbl_day_text = new Label();
             lbl_estancia_txt = new Label();
+            btn_test = new Button();
             SuspendLayout();
             // 
             // lbl_titulo
@@ -209,12 +210,23 @@
             lbl_estancia_txt.TabIndex = 26;
             lbl_estancia_txt.Text = "%$%";
             // 
+            // btn_test
+            // 
+            btn_test.Location = new Point(508, 250);
+            btn_test.Name = "btn_test";
+            btn_test.Size = new Size(75, 23);
+            btn_test.TabIndex = 27;
+            btn_test.Text = "button1";
+            btn_test.UseVisualStyleBackColor = true;
+            btn_test.Click += btn_test_Click;
+            // 
             // report
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.AppWorkspace;
             ClientSize = new Size(689, 387);
+            Controls.Add(btn_test);
             Controls.Add(lbl_estancia_txt);
             Controls.Add(lbl_day_text);
             Controls.Add(lbl_doctor_text);
@@ -256,5 +268,6 @@
         private Label lbl_doctor_text;
         private Label lbl_day_text;
         private Label lbl_estancia_txt;
+        private Button btn_test;
     }
 }

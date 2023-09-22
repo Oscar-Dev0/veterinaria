@@ -14,5 +14,6 @@ namespace veterinaria.src.itf
         public bool is_dead { set; get; } = false;
         public bool is_internship { set; get; } = false;
         public int internship_money { set; get; } = 0;
+        public string raza { set; get; } = string.Empty;
     }
 }
