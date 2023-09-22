@@ -80,7 +80,6 @@
             // 
             // txt_Owner
             // 
-            txt_Owner.BackColor = SystemColors.ScrollBar;
             txt_Owner.ForeColor = SystemColors.InfoText;
             txt_Owner.Location = new Point(12, 39);
             txt_Owner.Name = "txt_Owner";
@@ -101,7 +100,6 @@
             // 
             // txt_Name_Pet
             // 
-            txt_Name_Pet.BackColor = SystemColors.ScrollBar;
             txt_Name_Pet.Location = new Point(12, 132);
             txt_Name_Pet.Name = "txt_Name_Pet";
             txt_Name_Pet.Size = new Size(177, 23);
@@ -145,7 +143,6 @@
             // 
             // num_year
             // 
-            num_year.BackColor = SystemColors.ScrollBar;
             num_year.Location = new Point(12, 291);
             num_year.Name = "num_year";
             num_year.Size = new Size(52, 23);
@@ -153,7 +150,6 @@
             // 
             // DTP_pet_ingreso
             // 
-            DTP_pet_ingreso.CalendarMonthBackground = SystemColors.MenuText;
             DTP_pet_ingreso.CustomFormat = "";
             DTP_pet_ingreso.Format = DateTimePickerFormat.Short;
             DTP_pet_ingreso.ImeMode = ImeMode.On;
@@ -164,7 +160,6 @@
             // 
             // txt_direccion
             // 
-            txt_direccion.BackColor = SystemColors.ScrollBar;
             txt_direccion.Location = new Point(12, 481);
             txt_direccion.Name = "txt_direccion";
             txt_direccion.Size = new Size(208, 23);
@@ -184,7 +179,6 @@
             // 
             // rtb_diagnostico
             // 
-            rtb_diagnostico.BackColor = SystemColors.ScrollBar;
             rtb_diagnostico.Location = new Point(531, 368);
             rtb_diagnostico.Name = "rtb_diagnostico";
             rtb_diagnostico.Size = new Size(208, 197);
@@ -448,7 +442,8 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackColor = SystemColors.AppWorkspace;
+            BackColor = SystemColors.ControlDark;
+            BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
             BackgroundImageLayout = ImageLayout.Stretch;
             ClientSize = new Size(751, 577);
             Controls.Add(lbl_total_title);
