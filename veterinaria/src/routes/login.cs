@@ -3,34 +3,42 @@ using veterinaria.src.ITF;
 
 namespace veterinaria
 {
+    // La clase Veterinaria_login representa la ventana de inicio de sesión de la aplicación.
     public partial class Veterinaria_login : Form
     {
         Database database;
+
+        // Constructor de la clase Veterinaria_login.
         public Veterinaria_login(object s)
         {
             InitializeComponent();
             database = (Database)s;
         }
 
+        // Evento que se dispara al cargar el formulario.
         private void Form1_Load(object sender, EventArgs e)
         {
-
+            // Código de inicialización (si lo hubiera).
         }
 
+        // Evento que se dispara al hacer clic en el botón "Iniciar Sesión".
         private void button1_Click(object sender, EventArgs e)
         {
-
-            //datos del usuario
+            // Obtener los datos de usuario y contraseña ingresados por el usuario.
             var user = text_user.Text;
-            var passwort = text_passwort.Text;
+            var password = text_passwort.Text;
 
-            // Sacamos la lista de usuario
+            // Obtener la lista de usuarios registrados en la base de datos.
             var users = database.users();
             var user_db = users.Find((s) => s.Name == user);
-            var user_b = user_db != null ? true : false;
+            var userExists = user_db != null ? true : false;
 
-            //hacemos la funcion
-            if(user_b) if (user_db?.Password == passwort) {
+            // Verificar las credenciales del usuario.
+            if (userExists)
+            {
+                if (user_db?.Password == password)
+                {
+                    // Crear una instancia de la ventana principal y mostrarla.
                     var data = new ITF_home
                     {
                         doctor = user
@@ -40,17 +48,14 @@ namespace veterinaria
                     this.Hide();
                     home.ShowDialog();
                     this.Dispose(true);
+                }
+                else
+                {
+                    // Mostrar un mensaje de error si las credenciales son incorrectas.
+                    MessageBox.Show("Uno de los datos está mal ingresado.", "Error", 0, MessageBoxIcon.Error);
+                    return;
+                }
             }
-            else
-            {
-                MessageBox.Show("Uno de los datos está mal puesto.", "Error", 0, MessageBoxIcon.Error);
-                return;
-            };
-
-
-
-
-
         }
     }
 }

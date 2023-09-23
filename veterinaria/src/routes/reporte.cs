@@ -1,28 +1,26 @@
-﻿using Microsoft.VisualBasic.ApplicationServices;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿using System.Data;
 using veterinaria.src.functions;
 using veterinaria.src.itf;
 using veterinaria.src.ITF;
 
 namespace veterinaria
 {
+    // La clase report representa la ventana para generar informes veterinarios.
     public partial class report : Form
     {
         Database database;
         ITF_Reporte data;
+
+        // Constructor de la clase report.
         public report(object s, object d)
         {
             InitializeComponent();
+
+            // Inicialización de variables miembro.
             database = (Database)s;
             data = (ITF_Reporte)d;
+
+            // Configuración de los elementos del formulario con los datos del informe.
             lbl_doctor_text.Text = data.doctor;
             rtb_diagnostico.Text = data.diagnosis;
             CB_dead.Checked = data.is_dead;
@@ -32,16 +30,19 @@ namespace veterinaria
             lbl_txt_total.Text = "₡ 0";
         }
 
+        // Método para calcular el costo total, incluyendo internamiento, cremación y tratamientos.
         private double Money()
         {
             return data.internship_money + MultiAnimal() + cremacion();
         }
 
+        // Método para calcular el costo de cremación.
         private double cremacion()
         {
             var total = 0;
-
             var cre = CB_cremacion.Checked;
+
+            // Calcular el costo de cremación en función del tipo de mascota.
             switch (data.raza)
             {
                 case "conejo":
@@ -63,6 +64,8 @@ namespace veterinaria
 
             return total;
         }
+
+        // Método para calcular el costo total de tratamientos múltiples.
         private double MultiAnimal()
         {
             var money = MoneyAnimal();
@@ -74,6 +77,7 @@ namespace veterinaria
             return total;
         }
 
+        // Método para calcular el costo de tratamientos específicos según el tipo de mascota.
         private int MoneyAnimal()
         {
             var total = 0;
@@ -81,6 +85,8 @@ namespace veterinaria
             var ali = equals("Alimentacion");
             var ace = equals("Aceo");
             var cre = CB_cremacion.Checked;
+
+            // Calcular el costo de tratamientos según el tipo de mascota y tratamientos seleccionados.
             switch (data.raza)
             {
                 case "conejo":
@@ -118,6 +124,7 @@ namespace veterinaria
             return total;
         }
 
+        // Método para verificar si un tratamiento está seleccionado.
         private bool equals(string key)
         {
             try
@@ -132,6 +139,7 @@ namespace veterinaria
             };
         }
 
+        // Evento que se dispara al hacer clic en el botón "Calcular Total".
         private void btn_save_Click(object sender, EventArgs e)
         {
             double money = this.Money();
@@ -139,8 +147,10 @@ namespace veterinaria
             lbl_txt_total.Text = "₡ " + money;
         }
 
+        // Evento que se dispara al hacer clic en el botón "Salir".
         private void btn_leave_Click(object sender, EventArgs e)
         {
+            // Crear una instancia del formulario de inicio y volver a la ventana de inicio.
             var dis = new ITF_home
             {
                 doctor = data.doctor_user,
@@ -152,10 +162,11 @@ namespace veterinaria
             this.Dispose(true);
         }
 
+        // Evento que se dispara cuando se cambia el estado del CheckBox "Muerto".
         private void CB_dead_CheckedChanged(object sender, EventArgs e)
         {
             CB_cremacion.Visible = CB_dead.Checked;
-            if(!CB_dead.Checked) CB_cremacion.Checked = false;
+            if (!CB_dead.Checked) CB_cremacion.Checked = false;
         }
     }
 }

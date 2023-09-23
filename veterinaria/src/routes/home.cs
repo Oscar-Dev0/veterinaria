@@ -1,38 +1,31 @@
-﻿using Microsoft.VisualBasic.ApplicationServices;
-using Microsoft.VisualBasic.Logging;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Reflection.Metadata;
-using System.Security.Cryptography;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using veterinaria.src.functions;
+﻿using veterinaria.src.functions;
 using veterinaria.src.itf;
 using veterinaria.src.ITF;
 
 namespace veterinaria
 {
+    // La clase home representa la ventana principal de la aplicación de la veterinaria.
     public partial class home : Form
     {
-
+        // Variables miembro para almacenar la base de datos y datos de inicio de sesión.
         Database database;
         ITF_home data;
+
+        // Constructor de la clase home.
         public home(object db, object dt)
         {
             InitializeComponent();
+
+            // Inicialización de variables miembro.
             database = (Database)db;
             data = (ITF_home)dt;
+
+            // Configuración del nombre del doctor en el formulario.
             var user_db = database.users().Find(x => x.Name == data.doctor);
-
             lbl_doctor.Text = user_db != null ? user_db.DisplayName : "Undefined";
-
         }
 
+        // Evento que se dispara cuando se selecciona un elemento en el ComboBox de mascotas.
         private void CB_pet_SelectedIndexChanged(object sender, EventArgs e)
         {
             CB_tipo_raza.Visible = true;
@@ -40,6 +33,8 @@ namespace veterinaria
             CB_tipo_raza.Items.Clear();
 
             var pet = CB_pet.Text.ToString().ToLower();
+
+            // Agregar opciones de razas en función del tipo de mascota seleccionada.
             switch (pet)
             {
                 case "conejo":
@@ -78,9 +73,6 @@ namespace veterinaria
                     CB_tipo_raza.Items.Add("Appaloosa");
                     break;
             }
-
-
-
         }
 
         /// <summary>
@@ -89,7 +81,7 @@ namespace veterinaria
         /// <returns>El número de días entre la fecha y hora actual y la fecha de ingreso de la mascota.</returns>
         public int CalcularNumeroDias()
         {
-            // Obtener la fecha y hora actual y fecha Ingreso de la Mascota.
+            // Obtener la fecha y hora actual y fecha de ingreso de la mascota.
             DateTime actual = DateTime.Now;
             DateTime fechaIngresoMascota = DTP_pet_ingreso.Value;
 
@@ -101,14 +93,17 @@ namespace veterinaria
             return diasRedondeados;
         }
 
+        // Evento que se dispara al cargar el formulario.
         private void home_Load(object sender, EventArgs e)
         {
             lbl_total_text.Text = "₡ 0";
             DTP_pet_ingreso.MaxDate = DateTime.Today;
         }
 
+        // Evento que se dispara al hacer clic en el botón "Limpiar".
         private void btn_delete_Click(object sender, EventArgs e)
         {
+            // Limpiar los campos del formulario.
             txt_Owner.Text = string.Empty;
             txt_Name_Pet.Text = string.Empty;
             CB_pet.SelectedIndex = -1;
@@ -122,17 +117,22 @@ namespace veterinaria
             lbl_total_text.Text = 0.ToString();
         }
 
+        // Evento que se dispara al hacer clic en el botón "Salir".
         private void btn_leave_Click(object sender, EventArgs e)
         {
+            // Crear una instancia del formulario de inicio de sesión y ocultar el formulario actual.
             var login = new Veterinaria_login(database);
             this.Hide();
 
+            // Mostrar el formulario de inicio de sesión y liberar recursos del formulario actual.
             login.ShowDialog();
             this.Dispose(true);
         }
 
+        // Evento que se dispara al hacer clic en el botón "Guardar".
         private void btn_save_Click(object sender, EventArgs e)
         {
+            // Crear un objeto ITF_Reporte y guardar los datos ingresados en un nuevo informe.
             var dis = new ITF_Reporte();
             dis.diagnosis = rtb_diagnostico.Text;
             dis.stay_days = CalcularNumeroDias();
@@ -144,21 +144,23 @@ namespace veterinaria
             var reporte = new report(database, dis);
             this.Hide();
 
+            // Mostrar el formulario de informe y liberar recursos del formulario actual.
             reporte.ShowDialog();
             this.Dispose(true);
         }
 
+        // Método para calcular el costo de internamiento.
         private int Money()
         {
             var dias = CalcularNumeroDias();
-
             var total = 0;
 
-            if (dias > 3) total = 15000 * (dias - 3);
-            else total = 7000;
+            if (dias > 3)
+                total = 15000 * (dias - 3);
+            else
+                total = 7000;
 
             return total;
         }
-
     }
 }

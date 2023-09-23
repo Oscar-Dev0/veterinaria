@@ -1,28 +1,29 @@
-﻿
-using Npgsql;
-using System.Xml.Linq;
-
+﻿using Npgsql;
 
 namespace veterinaria.src.functions
 {
+    // La clase Database proporciona métodos para conectarse y acceder a la base de datos PostgreSQL.
     internal class Database
     {
-
-        //Datos de coneccion
+        // Datos de conexión a la base de datos PostgreSQL.
         private static string Host = "postgresql-oscargamer.alwaysdata.net";
         private static string User = "oscargamer_veterinaria";
         private static string DBname = "oscargamer_veterinaria";
         private static string Password = "50gS0uLvDWYVP2jZPULCbDyV25esEEbu";
         private static string Port = "5432";
 
-        //Base de datos estatico
+        // Cadena de conexión formateada.
         private static string connString = string.Format("Server={0}; User Id={1}; Database={2}; Port={3}; Password={4};SSLMode=Prefer", Host, User, DBname, Port, Password);
+
+        // Objeto de conexión NpgsqlConnection.
         private NpgsqlConnection data = new(connString);
         private bool status = false;
 
-        // Cache
+        // Cache para almacenar los usuarios.
         private List<Usuario> usuarios = new List<Usuario>();
         private bool status_user = false;
+
+        // Método para establecer la conexión a la base de datos.
         public void Conection()
         {
             try
@@ -36,6 +37,7 @@ namespace veterinaria.src.functions
             };
         }
 
+        // Método para obtener la lista de usuarios desde la base de datos.
         public List<Usuario> users()
         {
             if (!status) return usuarios;
@@ -58,9 +60,9 @@ namespace veterinaria.src.functions
             }
             return usuarios;
         }
-
     }
 
+    // Clase que representa un usuario en la base de datos.
     class Usuario
     {
         public int Id { get; set; }

@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace veterinaria.src.ITF
+﻿namespace veterinaria.src.ITF
 {
+    // La clase ITF_home representa la información del usuario o médico que ha iniciado sesión.
     public class ITF_home
     {
+        // Nombre del doctor o usuario.
         public string doctor { set; get; } = "";
-}
+    }
 }
