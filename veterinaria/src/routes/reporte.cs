@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.VisualBasic.ApplicationServices;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -9,6 +10,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using veterinaria.src.functions;
 using veterinaria.src.itf;
+using veterinaria.src.ITF;
 
 namespace veterinaria
 {
@@ -24,28 +26,51 @@ namespace veterinaria
             lbl_doctor_text.Text = data.doctor;
             rtb_diagnostico.Text = data.diagnosis;
             CB_dead.Checked = data.is_dead;
-            CB_dead.Enabled = !data.is_dead;
+            CB_cremacion.Visible = data.is_dead;
             lbl_day_text.Text = data.stay_days.ToString();
             lbl_estancia_txt.Text = "₡ " + data.internship_money.ToString();
             lbl_txt_total.Text = "₡ 0";
         }
 
-        private void btn_test_Click(object sender, EventArgs e)
-        {
-            var s = Money();
-            lbl_txt_total.Text = "₡ " + s.ToString();
-        }
-
         private double Money()
         {
-            return data.internship_money + MultiAnimal();
+            return data.internship_money + MultiAnimal() + cremacion();
+        }
+
+        private double cremacion()
+        {
+            var total = 0;
+
+            var cre = CB_cremacion.Checked;
+            switch (data.raza)
+            {
+                case "conejo":
+                    if (cre) total = total + 75000;
+                    break;
+                case "perro":
+                    if (cre) total = total + 100000;
+                    break;
+                case "gato":
+                    if (cre) total = total + 75000;
+                    break;
+                case "perico":
+                    if (cre) total = total + 75000;
+                    break;
+                case "caballo":
+                    if (cre) total = total + 300000;
+                    break;
+            };
+
+            return total;
         }
         private double MultiAnimal()
         {
             var money = MoneyAnimal();
-            if(data.stay_days == 0) return money;
+
+            if (data.stay_days == 0) return money;
 
             double total = money * data.stay_days;
+
             return total;
         }
 
@@ -55,6 +80,7 @@ namespace veterinaria
             var vac = equals("Vacunacion");
             var ali = equals("Alimentacion");
             var ace = equals("Aceo");
+            var cre = CB_cremacion.Checked;
             switch (data.raza)
             {
                 case "conejo":
@@ -79,7 +105,7 @@ namespace veterinaria
                     total = total + 2500;
                     if (vac) total = total + 2500;
                     if (ali) total = total + 1500;
-                    if (ace) total = total + 5000;
+                    if (ace) total = total + 2000;
                     break;
                 case "caballo":
                     total = total + 4800;
@@ -104,6 +130,32 @@ namespace veterinaria
             {
                 return false;
             };
+        }
+
+        private void btn_save_Click(object sender, EventArgs e)
+        {
+            double money = this.Money();
+
+            lbl_txt_total.Text = "₡ " + money;
+        }
+
+        private void btn_leave_Click(object sender, EventArgs e)
+        {
+            var dis = new ITF_home
+            {
+                doctor = data.doctor_user,
+            };
+
+            var home = new home(database, dis);
+            this.Hide();
+            home.ShowDialog();
+            this.Dispose(true);
+        }
+
+        private void CB_dead_CheckedChanged(object sender, EventArgs e)
+        {
+            CB_cremacion.Visible = CB_dead.Checked;
+            if(!CB_dead.Checked) CB_cremacion.Checked = false;
         }
     }
 }

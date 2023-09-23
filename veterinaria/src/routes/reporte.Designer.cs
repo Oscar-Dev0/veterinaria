@@ -45,7 +45,8 @@
             lbl_doctor_text = new Label();
             lbl_day_text = new Label();
             lbl_estancia_txt = new Label();
-            btn_test = new Button();
+            btn_save = new Button();
+            btn_leave = new Button();
             SuspendLayout();
             // 
             // lbl_titulo
@@ -138,6 +139,7 @@
             CB_dead.TabIndex = 17;
             CB_dead.Text = "Fallecido";
             CB_dead.UseVisualStyleBackColor = true;
+            CB_dead.CheckedChanged += CB_dead_CheckedChanged;
             // 
             // CB_cremacion
             // 
@@ -210,15 +212,31 @@
             lbl_estancia_txt.TabIndex = 26;
             lbl_estancia_txt.Text = "%$%";
             // 
-            // btn_test
+            // btn_save
             // 
-            btn_test.Location = new Point(508, 250);
-            btn_test.Name = "btn_test";
-            btn_test.Size = new Size(75, 23);
-            btn_test.TabIndex = 27;
-            btn_test.Text = "button1";
-            btn_test.UseVisualStyleBackColor = true;
-            btn_test.Click += btn_test_Click;
+            btn_save.BackColor = Color.Transparent;
+            btn_save.BackgroundImage = (Image)resources.GetObject("btn_save.BackgroundImage");
+            btn_save.BackgroundImageLayout = ImageLayout.Zoom;
+            btn_save.Cursor = Cursors.Hand;
+            btn_save.Location = new Point(554, 332);
+            btn_save.Name = "btn_save";
+            btn_save.Size = new Size(44, 44);
+            btn_save.TabIndex = 29;
+            btn_save.UseVisualStyleBackColor = false;
+            btn_save.Click += btn_save_Click;
+            // 
+            // btn_leave
+            // 
+            btn_leave.BackColor = Color.Transparent;
+            btn_leave.BackgroundImage = (Image)resources.GetObject("btn_leave.BackgroundImage");
+            btn_leave.BackgroundImageLayout = ImageLayout.Zoom;
+            btn_leave.Cursor = Cursors.Hand;
+            btn_leave.Location = new Point(629, 331);
+            btn_leave.Name = "btn_leave";
+            btn_leave.Size = new Size(48, 44);
+            btn_leave.TabIndex = 30;
+            btn_leave.UseVisualStyleBackColor = false;
+            btn_leave.Click += btn_leave_Click;
             // 
             // report
             // 
@@ -226,7 +244,8 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.AppWorkspace;
             ClientSize = new Size(689, 387);
-            Controls.Add(btn_test);
+            Controls.Add(btn_leave);
+            Controls.Add(btn_save);
             Controls.Add(lbl_estancia_txt);
             Controls.Add(lbl_day_text);
             Controls.Add(lbl_doctor_text);
@@ -268,6 +287,7 @@
         private Label lbl_doctor_text;
         private Label lbl_day_text;
         private Label lbl_estancia_txt;
-        private Button btn_test;
+        private Button btn_save;
+        private Button btn_leave;
     }
 }

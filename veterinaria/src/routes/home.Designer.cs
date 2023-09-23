@@ -256,6 +256,7 @@
             // 
             Rbtn_dead_not.AutoSize = true;
             Rbtn_dead_not.BackColor = Color.Red;
+            Rbtn_dead_not.Checked = true;
             Rbtn_dead_not.Cursor = Cursors.Hand;
             Rbtn_dead_not.Location = new Point(45, 3);
             Rbtn_dead_not.Name = "Rbtn_dead_not";
@@ -312,6 +313,7 @@
             // 
             Rbtn_internar_not.AutoSize = true;
             Rbtn_internar_not.BackColor = Color.Red;
+            Rbtn_internar_not.Checked = true;
             Rbtn_internar_not.Cursor = Cursors.Hand;
             Rbtn_internar_not.Location = new Point(47, 4);
             Rbtn_internar_not.Name = "Rbtn_internar_not";

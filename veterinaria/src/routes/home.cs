@@ -133,14 +133,15 @@ namespace veterinaria
 
         private void btn_save_Click(object sender, EventArgs e)
         {
-            var data = new ITF_Reporte();
-            data.diagnosis = rtb_diagnostico.Text;
-            data.stay_days = CalcularNumeroDias();
-            data.doctor = lbl_doctor.Text;
-            data.is_dead = Rbtn_dead_yes.Checked;
-            data.internship_money = Money();
-            data.raza = CB_pet.Text.ToString().ToLower();
-            var reporte = new report(database, data);
+            var dis = new ITF_Reporte();
+            dis.diagnosis = rtb_diagnostico.Text;
+            dis.stay_days = CalcularNumeroDias();
+            dis.doctor = lbl_doctor.Text;
+            dis.is_dead = Rbtn_dead_yes.Checked;
+            dis.internship_money = Money();
+            dis.raza = CB_pet.Text.ToString().ToLower();
+            dis.doctor_user = data.doctor;
+            var reporte = new report(database, dis);
             this.Hide();
 
             reporte.ShowDialog();
