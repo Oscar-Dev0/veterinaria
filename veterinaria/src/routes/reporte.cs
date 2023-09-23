@@ -48,7 +48,7 @@ namespace veterinaria
             var additionalCost = MultiAnimal();
 
             // Obtener el costo de cremación (si aplica).
-            var cremationCost = cremacion();
+            var cremationCost = Cremacion();
 
             // Calcular el costo total sumando los componentes individuales.
             return internmentCost + additionalCost + cremationCost;
@@ -63,7 +63,7 @@ namespace veterinaria
         /// El costo de cremación varía según el tipo de mascota, y se agrega al costo total si la opción de cremación está marcada.
         /// </remarks>
         /// <returns>El costo de cremación de la mascota.</returns>
-        private double cremacion()
+        private double Cremacion()
         {
             // Inicializar el costo de cremación en cero.
             var total = 0;
@@ -134,9 +134,9 @@ namespace veterinaria
             var total = 0;
 
             // Verificar si se han seleccionado tratamientos específicos.
-            var vac = equals("Vacunacion");
-            var ali = equals("Alimentacion");
-            var ace = equals("Aceo");
+            var vac = Equals("Vacunacion");
+            var ali = Equals("Alimentacion");
+            var ace = Equals("Aceo");
 
             // Calcular el costo de tratamientos según el tipo de mascota y tratamientos seleccionados.
             switch (data.raza)
@@ -187,7 +187,7 @@ namespace veterinaria
         /// </remarks>
         /// <param name="key">La clave que se va a buscar en la lista de tratamientos seleccionados.</param>
         /// <returns>True si la clave está presente en la lista de tratamientos seleccionados, de lo contrario, False.</returns>
-        private bool equals(string key)
+        private bool Equals(string key)
         {
             try
             {
