@@ -78,20 +78,30 @@ namespace veterinaria
         /// <summary>
         /// Calcula el número de días entre la fecha y hora actual y una fecha de ingreso de mascota especificada.
         /// </summary>
+        /// <remarks>
+        /// Este método obtiene la fecha y hora actual y la fecha de ingreso de la mascota desde el control DateTimePicker.
+        /// Luego, calcula la diferencia en días entre las dos fechas y redondea el resultado al número entero más cercano.
+        /// El resultado representa el número de días que ha estado la mascota ingresada.
+        /// </remarks>
         /// <returns>El número de días entre la fecha y hora actual y la fecha de ingreso de la mascota.</returns>
-        public int CalcularNumeroDias()
+        public int CalculateNumberOfDays()
         {
-            // Obtener la fecha y hora actual y fecha de ingreso de la mascota.
-            DateTime actual = DateTime.Now;
-            DateTime fechaIngresoMascota = DTP_pet_ingreso.Value;
+            // Obtiene la fecha y hora actual.
+            DateTime currentDate = DateTime.Now;
 
-            // Calcular la diferencia en días entre las dos fechas.
-            TimeSpan diferenciaFechas = actual - fechaIngresoMascota;
+            // Obtiene la fecha de ingreso de la mascota desde el control DateTimePicker.
+            DateTime petAdmissionDate = DTP_pet_ingreso.Value;
 
-            int diasRedondeados = diferenciaFechas.Days;
+            // Calcula la diferencia en días entre las dos fechas.
+            TimeSpan dateDifference = currentDate - petAdmissionDate;
 
-            return diasRedondeados;
+            // Redondea el resultado al número entero más cercano.
+            int roundedDays = dateDifference.Days;
+
+            return roundedDays;
         }
+
+
 
         // Evento que se dispara al cargar el formulario.
         private void home_Load(object sender, EventArgs e)
@@ -135,7 +145,7 @@ namespace veterinaria
             // Crear un objeto ITF_Reporte y guardar los datos ingresados en un nuevo informe.
             var dis = new ITF_Reporte();
             dis.diagnosis = rtb_diagnostico.Text;
-            dis.stay_days = CalcularNumeroDias();
+            dis.stay_days = CalculateNumberOfDays();
             dis.doctor = lbl_doctor.Text;
             dis.is_dead = Rbtn_dead_yes.Checked;
             dis.internship_money = Money();
@@ -149,18 +159,31 @@ namespace veterinaria
             this.Dispose(true);
         }
 
-        // Método para calcular el costo de internamiento.
+        /// <summary>
+        /// Calcula el costo total del internamiento de la mascota.
+        /// </summary>
+        /// <remarks>
+        /// Este método calcula el costo total del internamiento de la mascota en función del número de días
+        /// que ha estado internada. El costo se calcula de acuerdo con una tarifa diaria de $7,000 durante los
+        /// primeros 3 días y $15,000 por cada día adicional.
+        /// </remarks>
+        /// <returns>El costo total del internamiento de la mascota.</returns>
         private int Money()
         {
-            var dias = CalcularNumeroDias();
+            // Obtener el número de días de internamiento de la mascota.
+            var dias = CalculateNumberOfDays();
+
+            // Inicializar el costo total en cero.
             var total = 0;
 
+            // Calcular el costo total del internamiento.
             if (dias > 3)
-                total = 15000 * (dias - 3);
+                total = 15000 * (dias - 3) + 7000; // Tarifa diaria de $15,000 por cada día adicional y $7,000 para los primeros 3 días.
             else
-                total = 7000;
+                total = 7000; // Tarifa diaria de $7,000 para los primeros 3 días.
 
             return total;
         }
+
     }
 }
