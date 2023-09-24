@@ -21,15 +21,13 @@ namespace veterinaria
             data = (ITF_home)dt;
 
             // Configuración del nombre del doctor en el formulario.
-            var user_db = database.users().Find(x => x.Name == data.doctor);
-            lbl_doctor.Text = user_db != null ? user_db.DisplayName : "Undefined";
+            lbl_doctor.Text = data.doctor;
         }
 
         // Evento que se dispara cuando se selecciona un elemento en el ComboBox de mascotas.
         private void CB_pet_SelectedIndexChanged(object sender, EventArgs e)
         {
-            CB_tipo_raza.Visible = true;
-            lbl_tipo_raza.Visible = true;
+            CB_tipo_raza.Enabled = true;
             CB_tipo_raza.Items.Clear();
 
             var pet = CB_pet.Text.ToString().ToLower();
@@ -117,14 +115,16 @@ namespace veterinaria
             txt_Owner.Text = string.Empty;
             txt_Name_Pet.Text = string.Empty;
             CB_pet.SelectedIndex = -1;
-            CB_tipo_raza.Visible = false;
-            lbl_tipo_raza.Visible = false;
+            CB_tipo_raza.Enabled = false;
             CB_tipo_raza.Items.Clear();
+            CB_tipo_raza.SelectedIndex = -1;
+            Rbtn_dead_not.Checked = true;
+            Rbtn_internar_not.Checked = true;
             num_year.Value = 0;
             txt_direccion.Text = string.Empty;
             rtb_diagnostico.Text = string.Empty;
             DTP_pet_ingreso.Value = DateTime.Today;
-            lbl_total_text.Text = 0.ToString();
+            lbl_total_text.Text = "₡ 0";
         }
 
         // Evento que se dispara al hacer clic en el botón "Salir".

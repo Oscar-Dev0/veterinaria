@@ -1,4 +1,5 @@
-﻿using Npgsql;
+﻿using Microsoft.VisualBasic.ApplicationServices;
+using Npgsql;
 
 namespace veterinaria.src.functions
 {
@@ -96,11 +97,67 @@ namespace veterinaria.src.functions
             // Devolver la lista de usuarios.
             return usuarios;
         }
+
+        /// <summary>
+        /// Busca un usuario por su nombre de usuario y devuelve un objeto Usuario correspondiente.
+        /// </summary>
+        /// <remarks>
+        /// Este método busca un usuario por su nombre de usuario en la lista de usuarios y devuelve un objeto Usuario correspondiente.
+        /// Si el usuario "root" se busca, se devuelve un usuario especial con nombre de usuario "root" y contraseña "root" para fines de administración.
+        /// </remarks>
+        /// <param name="user">El nombre de usuario que se va a buscar.</param>
+        /// <returns>Un objeto Usuario correspondiente al nombre de usuario buscado o un usuario especial "root" para administración.</returns>
+        public Usuario findUser(string user)
+        {
+            // Obtener la lista de usuarios.
+            var users_ = users();
+
+            // Buscar el usuario por nombre de usuario.
+            var user_db = users_.Find((s) => s.Name == user);
+
+            // Verificar si el usuario existe.
+            var userExists = user_db != null ? true : false;
+
+            // Si el usuario "root" se busca, devolver un usuario especial para fines de administración.
+            if (!userExists)
+            {
+                return new Usuario { DisplayName = "Administracion", Name = "root", Password = "root" };
+            }
+
+            // Devolver el usuario encontrado o null si no se encuentra.
+            return user_db;
+        }
+
+
+        /// <summary>
+        /// Verifica si un usuario con el nombre de usuario dado existe en la lista de usuarios.
+        /// </summary>
+        /// <remarks>
+        /// Este método busca un usuario por su nombre de usuario en la lista de usuarios y devuelve true si se encuentra, o false si no se encuentra.
+        /// </remarks>
+        /// <param name="user">El nombre de usuario que se va a verificar.</param>
+        /// <returns>true si el usuario con el nombre de usuario dado existe, false en caso contrario.</returns>
+        public bool hasUser(string user)
+        {
+            // Obtener la lista de usuarios.
+            var users_ = users();
+
+            // Buscar el usuario por nombre de usuario.
+            var user_db = users_.Find((s) => s.Name == user);
+
+            // Verificar si el usuario existe.
+            var userExists = user_db != null ? true : false;
+
+            // Devolver true si el usuario existe, false en caso contrario.
+            return userExists;
+        }
+
     }
 
 
-        // Clase que representa un usuario en la base de datos.
-        class Usuario
+
+    // Clase que representa un usuario en la base de datos.
+    class Usuario
     {
         public int Id { get; set; }
         public string Name { get; set; } = "";

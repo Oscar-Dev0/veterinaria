@@ -24,6 +24,7 @@ namespace veterinaria
             lbl_doctor_text.Text = data.doctor;
             rtb_diagnostico.Text = data.diagnosis;
             CB_dead.Checked = data.is_dead;
+            CB_dead.Enabled = !data.is_dead;
             CB_cremacion.Visible = data.is_dead;
             lbl_day_text.Text = data.stay_days.ToString();
             lbl_estancia_txt.Text = "₡ " + data.internship_money.ToString();

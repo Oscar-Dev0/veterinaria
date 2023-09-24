@@ -29,17 +29,15 @@ namespace veterinaria
             var password = text_passwort.Text;
 
             // Obtener la lista de usuarios registrados en la base de datos.
-            var users = database.users();
-            var user_db = users.Find((s) => s.Name == user);
-            var userExists = user_db != null ? true : false;
+            var user_db = database.findUser(user);
 
             // Verificar las credenciales del usuario.
-            if (userExists && user_db?.Password == password)
+            if ( user_db.Name == user && user_db.Password == password )
             {
                 // Crear una instancia de la ventana principal y mostrarla.
                 var data = new ITF_home
                 {
-                    doctor = user
+                    doctor = user_db.DisplayName
                 };
 
                 var home = new consulta(database, data);
