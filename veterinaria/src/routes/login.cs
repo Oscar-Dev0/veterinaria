@@ -34,27 +34,25 @@ namespace veterinaria
             var userExists = user_db != null ? true : false;
 
             // Verificar las credenciales del usuario.
-            if (userExists)
+            if (userExists && user_db?.Password == password)
             {
-                if (user_db?.Password == password)
+                // Crear una instancia de la ventana principal y mostrarla.
+                var data = new ITF_home
                 {
-                    // Crear una instancia de la ventana principal y mostrarla.
-                    var data = new ITF_home
-                    {
-                        doctor = user
-                    };
+                    doctor = user
+                };
 
-                    var home = new home(database, data);
-                    this.Hide();
-                    home.ShowDialog();
-                    this.Dispose(true);
-                }
-                else
-                {
-                    // Mostrar un mensaje de error si las credenciales son incorrectas.
-                    MessageBox.Show("Uno de los datos está mal ingresado.", "Error", 0, MessageBoxIcon.Error);
-                    return;
-                }
+                var home = new consulta(database, data);
+                this.Hide();
+                home.ShowDialog();
+                this.Dispose(true);
+            }
+            else
+            {
+                // Mostrar un mensaje de error si las credenciales son incorrectas.
+                MessageBox.Show("Uno de los datos está mal ingresado.", "Error", 0, MessageBoxIcon.Error);
+                return;
+
             }
         }
     }

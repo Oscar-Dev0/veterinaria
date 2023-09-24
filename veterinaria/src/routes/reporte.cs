@@ -225,7 +225,7 @@ namespace veterinaria
                 doctor = data.doctor_user,
             };
 
-            var home = new home(database, dis);
+            var home = new consulta(database, dis);
             this.Hide();
             home.ShowDialog();
             this.Dispose(true);
