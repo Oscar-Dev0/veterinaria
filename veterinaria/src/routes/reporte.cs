@@ -241,5 +241,6 @@ namespace veterinaria
             lbl_estancia_txt.Text = "₡ " + data.internship_money.ToString();
             lbl_txt_total.Text = "₡ 0";
         }
+
     }
 }

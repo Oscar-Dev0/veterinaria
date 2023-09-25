@@ -45,17 +45,17 @@
             // 
             CLBx_tratamiento.BackColor = SystemColors.ActiveBorder;
             CLBx_tratamiento.BorderStyle = BorderStyle.None;
-            CLBx_tratamiento.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            CLBx_tratamiento.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
             CLBx_tratamiento.FormattingEnabled = true;
             CLBx_tratamiento.Items.AddRange(new object[] { "Vacunacion", "Alimentacion", "Aceo" });
             CLBx_tratamiento.Location = new Point(61, 195);
             CLBx_tratamiento.Name = "CLBx_tratamiento";
-            CLBx_tratamiento.Size = new Size(132, 54);
+            CLBx_tratamiento.Size = new Size(142, 60);
             CLBx_tratamiento.TabIndex = 4;
             // 
             // rtb_diagnostico
             // 
-            rtb_diagnostico.Location = new Point(12, 292);
+            rtb_diagnostico.Location = new Point(61, 321);
             rtb_diagnostico.Name = "rtb_diagnostico";
             rtb_diagnostico.Size = new Size(208, 61);
             rtb_diagnostico.TabIndex = 16;
@@ -64,30 +64,36 @@
             // CB_dead
             // 
             CB_dead.AutoSize = true;
-            CB_dead.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
-            CB_dead.Location = new Point(247, 294);
+            CB_dead.BackColor = Color.Transparent;
+            CB_dead.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            CB_dead.ForeColor = Color.White;
+            CB_dead.Location = new Point(324, 321);
             CB_dead.Name = "CB_dead";
-            CB_dead.Size = new Size(82, 21);
+            CB_dead.Size = new Size(98, 25);
             CB_dead.TabIndex = 17;
             CB_dead.Text = "Fallecido";
-            CB_dead.UseVisualStyleBackColor = true;
+            CB_dead.UseVisualStyleBackColor = false;
             CB_dead.CheckedChanged += CB_dead_CheckedChanged;
             // 
             // CB_cremacion
             // 
             CB_cremacion.AutoSize = true;
-            CB_cremacion.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
-            CB_cremacion.Location = new Point(247, 332);
+            CB_cremacion.BackColor = Color.Transparent;
+            CB_cremacion.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            CB_cremacion.ForeColor = Color.White;
+            CB_cremacion.Location = new Point(324, 354);
             CB_cremacion.Name = "CB_cremacion";
-            CB_cremacion.Size = new Size(92, 21);
+            CB_cremacion.Size = new Size(111, 25);
             CB_cremacion.TabIndex = 18;
             CB_cremacion.Text = "Cremacion";
-            CB_cremacion.UseVisualStyleBackColor = true;
+            CB_cremacion.UseVisualStyleBackColor = false;
             // 
             // lbl_txt_total
             // 
             lbl_txt_total.AutoSize = true;
+            lbl_txt_total.BackColor = Color.Transparent;
             lbl_txt_total.Font = new Font("Arial Black", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            lbl_txt_total.ForeColor = Color.White;
             lbl_txt_total.Location = new Point(495, 329);
             lbl_txt_total.Name = "lbl_txt_total";
             lbl_txt_total.Size = new Size(53, 23);
@@ -97,7 +103,9 @@
             // lbl_doctor_text
             // 
             lbl_doctor_text.AutoSize = true;
+            lbl_doctor_text.BackColor = Color.Transparent;
             lbl_doctor_text.Font = new Font("Arial Black", 11F, FontStyle.Bold, GraphicsUnit.Point);
+            lbl_doctor_text.ForeColor = Color.White;
             lbl_doctor_text.Location = new Point(494, 80);
             lbl_doctor_text.Name = "lbl_doctor_text";
             lbl_doctor_text.Size = new Size(50, 22);
@@ -107,7 +115,9 @@
             // lbl_day_text
             // 
             lbl_day_text.AutoSize = true;
+            lbl_day_text.BackColor = Color.Transparent;
             lbl_day_text.Font = new Font("Arial Black", 11F, FontStyle.Bold, GraphicsUnit.Point);
+            lbl_day_text.ForeColor = SystemColors.ButtonHighlight;
             lbl_day_text.Location = new Point(61, 80);
             lbl_day_text.Name = "lbl_day_text";
             lbl_day_text.Size = new Size(50, 22);
@@ -117,7 +127,9 @@
             // lbl_estancia_txt
             // 
             lbl_estancia_txt.AutoSize = true;
+            lbl_estancia_txt.BackColor = Color.Transparent;
             lbl_estancia_txt.Font = new Font("Arial Black", 11F, FontStyle.Bold, GraphicsUnit.Point);
+            lbl_estancia_txt.ForeColor = Color.White;
             lbl_estancia_txt.Location = new Point(61, 138);
             lbl_estancia_txt.Name = "lbl_estancia_txt";
             lbl_estancia_txt.Size = new Size(50, 22);
@@ -143,7 +155,7 @@
             btn_leave.BackgroundImage = (Image)resources.GetObject("btn_leave.BackgroundImage");
             btn_leave.BackgroundImageLayout = ImageLayout.Zoom;
             btn_leave.Cursor = Cursors.Hand;
-            btn_leave.Location = new Point(629, 331);
+            btn_leave.Location = new Point(0, 51);
             btn_leave.Name = "btn_leave";
             btn_leave.Size = new Size(48, 44);
             btn_leave.TabIndex = 30;
