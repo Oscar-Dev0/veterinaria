@@ -32,7 +32,7 @@ namespace veterinaria
             var user_db = database.findUser(user);
 
             // Verificar las credenciales del usuario.
-            if ( user_db.Name == user && user_db.Password == password )
+            if (user_db.Name == user && user_db.Password == password)
             {
                 // Crear una instancia de la ventana principal y mostrarla.
                 var data = new ITF_home
