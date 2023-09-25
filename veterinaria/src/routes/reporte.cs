@@ -19,16 +19,6 @@ namespace veterinaria
             // Inicialización de variables miembro.
             database = (Database)s;
             data = (ITF_Reporte)d;
-
-            // Configuración de los elementos del formulario con los datos del informe.
-            lbl_doctor_text.Text = data.doctor;
-            rtb_diagnostico.Text = data.diagnosis;
-            CB_dead.Checked = data.is_dead;
-            CB_dead.Enabled = !data.is_dead;
-            CB_cremacion.Visible = data.is_dead;
-            lbl_day_text.Text = data.stay_days.ToString();
-            lbl_estancia_txt.Text = "₡ " + data.internship_money.ToString();
-            lbl_txt_total.Text = "₡ 0";
         }
 
         /// <summary>
@@ -237,6 +227,19 @@ namespace veterinaria
         {
             CB_cremacion.Visible = CB_dead.Checked;
             if (!CB_dead.Checked) CB_cremacion.Checked = false;
+        }
+
+        private void report_Load(object sender, EventArgs e)
+        {
+            // Configuración de los elementos del formulario con los datos del informe.
+            lbl_doctor_text.Text = data.doctor;
+            rtb_diagnostico.Text = data.diagnosis;
+            CB_dead.Checked = data.is_dead;
+            CB_dead.Enabled = !data.is_dead;
+            CB_cremacion.Visible = data.is_dead;
+            lbl_day_text.Text = data.stay_days.ToString();
+            lbl_estancia_txt.Text = "₡ " + data.internship_money.ToString();
+            lbl_txt_total.Text = "₡ 0";
         }
     }
 }
