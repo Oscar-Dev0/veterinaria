@@ -307,6 +307,8 @@
             Controls.Add(txt_Owner);
             DoubleBuffered = true;
             Icon = (Icon)resources.GetObject("$this.Icon");
+            MaximizeBox = false;
+            MdiChildrenMinimizedAnchorBottom = false;
             Name = "consulta";
             Text = "consulta";
             Load += home_Load;

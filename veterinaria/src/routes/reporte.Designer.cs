@@ -180,6 +180,8 @@
             Controls.Add(rtb_diagnostico);
             Controls.Add(CLBx_tratamiento);
             Icon = (Icon)resources.GetObject("$this.Icon");
+            MaximizeBox = false;
+            MdiChildrenMinimizedAnchorBottom = false;
             Name = "report";
             Text = "report";
             Load += report_Load;

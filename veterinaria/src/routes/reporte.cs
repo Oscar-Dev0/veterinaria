@@ -1,7 +1,10 @@
-﻿using System.Data;
+﻿using Microsoft.VisualBasic;
+using System;
+using System.Data;
 using veterinaria.src.functions;
 using veterinaria.src.itf;
 using veterinaria.src.ITF;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
 
 namespace veterinaria
 {
@@ -213,7 +216,7 @@ namespace veterinaria
             // Crear una instancia del formulario de inicio y volver a la ventana de inicio.
             var dis = new ITF_home
             {
-                doctor = data.doctor_user,
+                doctor = data.doctor,
             };
 
             var home = new consulta(database, dis);
@@ -229,17 +232,34 @@ namespace veterinaria
             if (!CB_dead.Checked) CB_cremacion.Checked = false;
         }
 
-        private void report_Load(object sender, EventArgs e)
+    /// <summary>
+    /// Manejador de eventos que se ejecuta cuando se carga el formulario de informe.
+    /// </summary>
+    private void report_Load(object sender, EventArgs e)
         {
-            // Configuración de los elementos del formulario con los datos del informe.
-            lbl_doctor_text.Text = data.doctor;
-            rtb_diagnostico.Text = data.diagnosis;
-            CB_dead.Checked = data.is_dead;
-            CB_dead.Enabled = !data.is_dead;
-            CB_cremacion.Visible = data.is_dead;
-            lbl_day_text.Text = data.stay_days.ToString();
-            lbl_estancia_txt.Text = "₡ " + data.internship_money.ToString();
-            lbl_txt_total.Text = "₡ 0";
+        // Configurar el nombre del doctor en el formulario.
+        lbl_doctor_text.Text = data.doctor;
+
+        // Configurar el diagnóstico en el cuadro de texto de diagnóstico.
+        rtb_diagnostico.Text = data.diagnosis;
+
+        // Configurar el estado de vida de la mascota (viva o muerta) en el cuadro de selección.
+        CB_dead.Checked = data.is_dead;
+
+        // Habilitar o deshabilitar la opción de indicar si la mascota está muerta, dependiendo del estado.
+        CB_dead.Enabled = !data.is_dead;
+
+        // Mostrar u ocultar la opción de cremación dependiendo del estado de vida de la mascota.
+        CB_cremacion.Visible = data.is_dead;
+
+        // Configurar el número de días de estancia en el formulario.
+        lbl_day_text.Text = data.stay_days.ToString();
+
+        // Configurar el costo de internamiento en el formulario.
+        lbl_estancia_txt.Text = "₡ " + data.internship_money.ToString();
+
+        // Configurar el costo total del tratamiento en el formulario (inicialmente 0).
+        lbl_txt_total.Text = "₡ 0";
         }
 
     }
