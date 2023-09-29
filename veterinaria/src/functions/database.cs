@@ -1,5 +1,4 @@
-﻿using Microsoft.VisualBasic.ApplicationServices;
-using Npgsql;
+﻿using Npgsql;
 using veterinaria.src.itf;
 
 namespace veterinaria.src.functions
@@ -22,7 +21,7 @@ namespace veterinaria.src.functions
         private bool status = false;
 
         // Cache para almacenar los usuarios.
-        private List<Usuario> usuarios = new List<Usuario>();
+        private List<Usuario> usuarios = new();
         private bool status_user = false;
 
         /// <summary>
@@ -62,7 +61,7 @@ namespace veterinaria.src.functions
         /// evitar consultas adicionales a la base de datos.
         /// </remarks>
         /// <returns>Una lista de objetos Usuario que representan a los usuarios registrados.</returns>
-        public List<Usuario> users()
+        public List<Usuario> Users()
         {
             // Verificar si la conexión a la base de datos está activa.
             if (!status) return usuarios;
@@ -79,7 +78,7 @@ namespace veterinaria.src.functions
                 while (reader.Read())
                 {
                     // Crear un objeto Usuario a partir de los datos obtenidos de la base de datos.
-                    Usuario usuario = new Usuario
+                    var usuario = new Usuario
                     {
                         Id = reader.GetInt32(reader.GetOrdinal("id")),
                         Name = reader.GetString(reader.GetOrdinal("name")),
@@ -107,11 +106,15 @@ namespace veterinaria.src.functions
         /// Si el usuario "root" se busca, se devuelve un usuario especial con nombre de usuario "root" y contraseña "root" para fines de administración.
         /// </remarks>
         /// <param name="user">El nombre de usuario que se va a buscar.</param>
-        /// <returns>Un objeto Usuario correspondiente al nombre de usuario buscado o un usuario especial "root" para administración.</returns>
-        public Usuario findUser(string user)
+        /// <returns>
+        /// Un objeto Usuario correspondiente al nombre de usuario buscado o un usuario especial "root" para administración.
+        /// Si no se encuentra un usuario con el nombre especificado, se devuelve un usuario especial "root" como valor predeterminado.
+        /// </returns>
+        /// <seealso cref="Usuario"/>
+        public Usuario FindUser(string user)
         {
             // Obtener la lista de usuarios.
-            var users_ = users();
+            var users_ = Users();
 
             // Buscar el usuario por nombre de usuario.
             var user_db = users_.Find((s) => s.Name == user);
@@ -119,15 +122,10 @@ namespace veterinaria.src.functions
             // Verificar si el usuario existe.
             var userExists = user_db != null ? true : false;
 
-            // Si el usuario "root" se busca, devolver un usuario especial para fines de administración.
-            if (!userExists)
-            {
-                return new Usuario { DisplayName = "Administracion", Name = "root", Password = "root" };
-            }
-
-            // Devolver el usuario encontrado o null si no se encuentra.
-            return user_db;
+            // Devolver el usuario encontrado o un usuario especial "root" como valor predeterminado.
+            return user_db ?? new Usuario { DisplayName = "Administracion", Name = "root", Password = "root" };
         }
+
 
 
         /// <summary>
@@ -138,10 +136,10 @@ namespace veterinaria.src.functions
         /// </remarks>
         /// <param name="user">El nombre de usuario que se va a verificar.</param>
         /// <returns>true si el usuario con el nombre de usuario dado existe, false en caso contrario.</returns>
-        public bool hasUser(string user)
+        public bool HasUser(string user)
         {
             // Obtener la lista de usuarios.
-            var users_ = users();
+            var users_ = Users();
 
             // Buscar el usuario por nombre de usuario.
             var user_db = users_.Find((s) => s.Name == user);

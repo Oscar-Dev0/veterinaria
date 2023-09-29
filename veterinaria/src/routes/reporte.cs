@@ -1,4 +1,5 @@
 ﻿using System.Data;
+using System.Runtime.ConstrainedExecution;
 using veterinaria.src.functions;
 using veterinaria.src.itf;
 using veterinaria.src.ITF;
@@ -22,162 +23,87 @@ namespace veterinaria
         }
 
         /// <summary>
-        /// Calcula el costo total del tratamiento y servicios para la mascota, incluyendo internamiento, tratamientos adicionales y cremación (si aplica).
+        /// Calcula los costos relacionados con el tratamiento de la mascota, incluido el costo total, costo de vacunación, costo de alimentación,
+        /// costo de aseo y costo de cremación.
         /// </summary>
         /// <remarks>
-        /// Este método calcula el costo total de todos los servicios relacionados con la mascota, incluyendo el internamiento, los tratamientos adicionales
-        /// y la cremación si está seleccionada. Suma los costos de internamiento, tratamientos adicionales y cremación (si aplica) para obtener el costo
-        /// total del tratamiento de la mascota.
+        /// Este método realiza cálculos detallados de los costos basados en la raza de la mascota, la presencia de tratamientos (vacunación, alimentación, aseo)
+        /// y el período de estancia. Calcula el costo total de tratamiento, el costo de vacunación, el costo de alimentación, el costo de aseo y el costo de cremación (si corresponde).
         /// </remarks>
-        /// <returns>El costo total del tratamiento y servicios para la mascota.</returns>
-        private ITF_Totals Money()
+        /// <returns>Un objeto ITF_Totals que contiene los costos calculados.</returns>
+        private ITF_Totals Moneys()
         {
-            // Obtener el costo de tratamientos adicionales y servicios múltiples.
-            var moneys = MultiAnimal();
+            int total = 0, Total_vac = 0, Total_Ali = 0, Total_Ace = 0, Total_Cre = 0;
 
-            // Obtener el costo del internamiento de la mascota.
-            var internmentCost = data.internship_money;
-
-            // Obtener el costo de cremación (si aplica).
-            moneys.Cremacion = Cremacion();
-
-            // Calcular el costo total sumando los componentes individuales.
-            moneys.Total = internmentCost + moneys.Total + moneys.Cremacion;
-            return moneys;
-        }
-
-
-        /// <summary>
-        /// Calcula el costo de cremación de la mascota en función de su tipo de raza y si se ha seleccionado la opción de cremación.
-        /// </summary>
-        /// <remarks>
-        /// Este método calcula el costo de cremación de la mascota en base a su tipo de raza y si se ha seleccionado la opción de cremación.
-        /// El costo de cremación varía según el tipo de mascota, y se agrega al costo total si la opción de cremación está marcada.
-        /// </remarks>
-        /// <returns>El costo de cremación de la mascota.</returns>
-        private double Cremacion()
-        {
-            // Inicializar el costo de cremación en cero.
-            var total = 0;
-
-            // Verificar si la opción de cremación está marcada.
-            var cre = CB_cremacion.Checked;
-
-            // Calcular el costo de cremación en función del tipo de mascota.
-            switch (data.raza)
-            {
-                case "conejo":
-                    if (cre) total = total + 75000;
-                    break;
-                case "perro":
-                    if (cre) total = total + 100000;
-                    break;
-                case "gato":
-                    if (cre) total = total + 75000;
-                    break;
-                case "perico":
-                    if (cre) total = total + 75000;
-                    break;
-                case "caballo":
-                    if (cre) total = total + 300000;
-                    break;
-            };
-
-            return total;
-        }
-
-
-        /// <summary>
-        /// Calcula el costo total de servicios adicionales para la mascota en función del costo diario y el número de días de internamiento.
-        /// </summary>
-        /// <remarks>
-        /// Este método calcula el costo total de servicios adicionales para la mascota en función del costo diario y el número de días de internamiento.
-        /// Si el número de días de internamiento es igual a cero, se devuelve el costo diario único. De lo contrario, se calcula el costo total
-        /// multiplicando el costo diario por el número de días de internamiento.
-        /// </remarks>
-        /// <returns>El costo total de servicios adicionales para la mascota.</returns>
-        private ITF_Totals MultiAnimal()
-        {
-            // Obtener el costo diario de servicios adicionales.
-            var moneys = MoneyAnimal();
-            
-         
-
-            // Verificar si el número de días de internamiento es igual a cero.
-            if (data.stay_days == 0) return moneys;
-
-            // Calcular el costo total multiplicando el costo diario por el número de días de internamiento.
-            moneys.Total = moneys.Total * data.stay_days;
-
-            return moneys;
-        }
-
-
-        /// <summary>
-        /// Calcula el costo total de tratamientos y servicios adicionales para la mascota en función de su tipo de raza y tratamientos seleccionados.
-        /// </summary>
-        /// <remarks>
-        /// Este método calcula el costo total de tratamientos y servicios adicionales para la mascota en función de su tipo de raza y los tratamientos
-        /// seleccionados. El costo varía según el tipo de mascota y los tratamientos elegidos. Se suman los costos de los tratamientos seleccionados
-        /// al costo base de acuerdo con el tipo de mascota.
-        /// </remarks>
-        /// <returns>El costo total de tratamientos y servicios adicionales para la mascota.</returns>
-        private ITF_Totals MoneyAnimal()
-        {
-            // Inicializar el costo total y de los otros en cero.
-            int total = 0, Total_vac = 0, Total_Ali = 0, Total_Ace = 0;
-
-            // Verificar si se han seleccionado tratamientos específicos.
+            // Función para verificar si la raza de la mascota coincide.
+            var raza = (string Raza) => data.pet_type == Raza;
+            // Hacer los bool para verificar si pasan las diferentes cosas
             var vac = Equals("Vacunacion");
             var ali = Equals("Alimentacion");
             var ace = Equals("Aseo");
+            var cre = CB_cremacion.Checked;
 
-            // Calcular el costo de tratamientos según el tipo de mascota y tratamientos seleccionados.
-            switch (data.raza)
+            // Verificar la raza de la mascota y realizar cálculos específicos.
+            if (raza("conejo"))
             {
-                case "conejo":
-                    total = total + 2500;
-                    if (vac) Total_vac = 2500;
-                    if (ali) Total_Ali = 1500;
-                    if (ace) Total_Ace = 5000;
-                    break;
-                case "perro":
-                    total = total + 3200;
-                    if (vac) Total_vac = 3200;
-                    if (ali) Total_Ali = 2000;
-                    if (ace) Total_Ace = 2000;
-                    break;
-                case "gato":
-                    total = total + 3200;
-                    if (vac) Total_vac = 3200;
-                    if (ali) Total_Ali = 2000;
-                    if (ace) Total_Ace = 2000;
-                    break;
-                case "perico":
-                    total = total + 2500;
-                    if (vac) Total_vac = 2500;
-                    if (ali) Total_Ali = 1500;
-                    if (ace) Total_Ace = 2000;
-                    break;
-                case "caballo":
-                    total = total + 4800;
-                    if (vac) Total_vac = 4800;
-                    if (ali) Total_Ali = 4000;
-                    if (ace) Total_Ace = 15000;
-                    break;
-            };
+                total = total + 2500;
+                if (vac) Total_vac = 2500;
+                if (ali) Total_Ali = 1500;
+                if (ace) Total_Ace = 5000;
+                if (cre) Total_Cre = 75000;
+            }
+            else if (raza("perro"))
+            {
+                total = total + 3200;
+                if (vac) Total_vac = 3200;
+                if (ali) Total_Ali = 2000;
+                if (ace) Total_Ace = 2000;
+                if (cre) Total_Cre = 100000;
+            }
+            else if (raza("gato"))
+            {
+                total = total + 3200;
+                if (vac) Total_vac = 3200;
+                if (ali) Total_Ali = 2000;
+                if (ace) Total_Ace = 2000;
+                if (cre) Total_Cre = 75000;
+            }
+            else if (raza("perico"))
+            {
+                total = total + 2500;
+                if (vac) Total_vac = 2500;
+                if (ali) Total_Ali = 1500;
+                if (ace) Total_Ace = 2000;
+                if (cre) Total_Cre = 75000;
+            }
+            else if (raza("caballo"))
+            {
+                total = total + 4800;
+                if (vac) Total_vac = 4800;
+                if (ali) Total_Ali = 4000;
+                if (ace) Total_Ace = 15000;
+                if (cre) Total_Cre = 300000;
+            }
 
+            // Calcular el costo total.
             total = total + Total_Ace + Total_Ali + Total_vac;
 
+            // Aplicar el costo total para un período de estancia (si aplica).
+            total = data.Stay_days == 0 ? total : total * data.Stay_days;
+
+            // Agregar el costo de cremación (si aplica).
+            total = total + Total_Cre + data.internship_money;
+
+            // Devolver un objeto ITF_Totals con los costos calculados.
             return new ITF_Totals
             {
                 Total = total,
                 Vacunacion = Total_vac,
                 Aceo = Total_Ace,
-                Alimentacion = Total_Ali
+                Alimentacion = Total_Ali,
+                Cremacion = Total_Cre,
             };
         }
-
 
         /// <summary>
         /// Verifica si una clave dada está presente en la lista de tratamientos seleccionados.
@@ -213,7 +139,7 @@ namespace veterinaria
         // Evento que se dispara al hacer clic en el botón "Calcular Total".
         private void btn_save_Click(object sender, EventArgs e)
         {
-            double money = this.Money().Total;
+            double money = Moneys().Total;
 
             lbl_txt_total.Text = "₡ " + money;
         }
@@ -222,7 +148,7 @@ namespace veterinaria
         private void btn_leave_Click(object sender, EventArgs e)
         {
             // Crear una instancia del formulario de inicio y volver a la ventana de inicio.
-            var dis = new ITF_home
+            var dis = new ITF_Consulta
             {
                 Doctor = data.Doctor,
             };
@@ -261,7 +187,7 @@ namespace veterinaria
             CB_cremacion.Visible = data.is_dead;
 
             // Configurar el número de días de estancia en el formulario.
-            lbl_day_text.Text = data.stay_days.ToString();
+            lbl_day_text.Text = data.Stay_days.ToString();
 
             // Configurar el costo de internamiento en el formulario.
             lbl_estancia_txt.Text = "₡ " + data.internship_money.ToString();

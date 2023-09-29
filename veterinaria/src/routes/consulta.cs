@@ -146,11 +146,11 @@ namespace veterinaria
             var dis = new ITF_Reporte
             {
                 diagnosis = rtb_diagnostico.Text,
-                stay_days = CalculateNumberOfDays(),
+                Stay_days = CalculateNumberOfDays(),
                 Doctor = data.Doctor,
                 is_dead = Rbtn_dead_yes.Checked,
                 internship_money = Money(),
-                raza = CB_pet.Text.ToString().ToLower()
+                pet_type = CB_pet.Text.ToString().ToLower()
             };
             var reporte = new report(database, dis);
             this.Hide();
