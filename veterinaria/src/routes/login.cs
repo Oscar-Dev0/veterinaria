@@ -37,7 +37,7 @@ namespace veterinaria
                 // Crear una instancia de la ventana principal y mostrarla.
                 var data = new ITF_home
                 {
-                    doctor = user_db.DisplayName
+                    Doctor = user_db
                 };
 
                 var home = new consulta(database, data);

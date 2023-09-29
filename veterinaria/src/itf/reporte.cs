@@ -1,10 +1,10 @@
-﻿namespace veterinaria.src.itf
+﻿using veterinaria.src.ITF;
+
+namespace veterinaria.src.itf
 {
     // La clase ITF_Reporte define las propiedades de un informe veterinario.
-    internal class ITF_Reporte
+    public class ITF_Reporte: ITF_Consulta
     {
-        // Nombre del doctor que realiza el informe.
-        public string doctor { set; get; } = string.Empty;
 
         // Número de días de estancia de la mascota.
         public int stay_days { set; get; } = 0;
@@ -23,8 +23,19 @@
 
         // Tipo de raza de la mascota.
         public string raza { set; get; } = string.Empty;
+    }
 
-        // Nombre de usuario del doctor que realiza el informe.
-        public string doctor_user { set; get; } = string.Empty;
+    public class ITF_Totals
+    {
+        // total de la vacunacion
+        public int Vacunacion { set; get; } = 0;
+        // total final 
+        public double Total { set; get; } = 0;
+        // total Aceo
+        public int Aceo { set; get;} = 0;
+        // total de la alimentacion
+        public int Alimentacion { set; get; } = 0;
+        // total de la cremacion
+        public double Cremacion { set; get; } = 0;
     }
 }

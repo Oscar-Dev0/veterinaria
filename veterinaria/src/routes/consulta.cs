@@ -9,19 +9,19 @@ namespace veterinaria
     {
         // Variables miembro para almacenar la base de datos y datos de inicio de sesión.
         Database database;
-        ITF_home data;
+        ITF_Consulta data;
 
-        // Constructor de la clase home.
+        // Constructor de la clase Consulta.
         public consulta(object db, object dt)
         {
             InitializeComponent();
 
             // Inicialización de variables miembro.
             database = (Database)db;
-            data = (ITF_home)dt;
+            data = (ITF_Consulta)dt;
 
             // Configuración del nombre del doctor en el formulario.
-            lbl_doctor.Text = data.doctor;
+            lbl_doctor.Text = data.Doctor.DisplayName;
         }
 
         // Evento que se dispara cuando se selecciona un elemento en el ComboBox de mascotas.
@@ -143,14 +143,15 @@ namespace veterinaria
         private void btn_save_Click(object sender, EventArgs e)
         {
             // Crear un objeto ITF_Reporte y guardar los datos ingresados en un nuevo informe.
-            var dis = new ITF_Reporte();
-            dis.diagnosis = rtb_diagnostico.Text;
-            dis.stay_days = CalculateNumberOfDays();
-            dis.doctor = lbl_doctor.Text;
-            dis.is_dead = Rbtn_dead_yes.Checked;
-            dis.internship_money = Money();
-            dis.raza = CB_pet.Text.ToString().ToLower();
-            dis.doctor_user = data.doctor;
+            var dis = new ITF_Reporte
+            {
+                diagnosis = rtb_diagnostico.Text,
+                stay_days = CalculateNumberOfDays(),
+                Doctor = data.Doctor,
+                is_dead = Rbtn_dead_yes.Checked,
+                internship_money = Money(),
+                raza = CB_pet.Text.ToString().ToLower()
+            };
             var reporte = new report(database, dis);
             this.Hide();
 

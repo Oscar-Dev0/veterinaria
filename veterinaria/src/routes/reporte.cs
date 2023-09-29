@@ -1,10 +1,7 @@
-﻿using Microsoft.VisualBasic;
-using System;
-using System.Data;
+﻿using System.Data;
 using veterinaria.src.functions;
 using veterinaria.src.itf;
 using veterinaria.src.ITF;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
 
 namespace veterinaria
 {
@@ -33,19 +30,20 @@ namespace veterinaria
         /// total del tratamiento de la mascota.
         /// </remarks>
         /// <returns>El costo total del tratamiento y servicios para la mascota.</returns>
-        private double Money()
+        private ITF_Totals Money()
         {
+            // Obtener el costo de tratamientos adicionales y servicios múltiples.
+            var moneys = MultiAnimal();
+
             // Obtener el costo del internamiento de la mascota.
             var internmentCost = data.internship_money;
 
-            // Obtener el costo de tratamientos adicionales y servicios múltiples.
-            var additionalCost = MultiAnimal();
-
             // Obtener el costo de cremación (si aplica).
-            var cremationCost = Cremacion();
+            moneys.Cremacion = Cremacion();
 
             // Calcular el costo total sumando los componentes individuales.
-            return internmentCost + additionalCost + cremationCost;
+            moneys.Total = internmentCost + moneys.Total + moneys.Cremacion;
+            return moneys;
         }
 
 
@@ -98,18 +96,20 @@ namespace veterinaria
         /// multiplicando el costo diario por el número de días de internamiento.
         /// </remarks>
         /// <returns>El costo total de servicios adicionales para la mascota.</returns>
-        private double MultiAnimal()
+        private ITF_Totals MultiAnimal()
         {
             // Obtener el costo diario de servicios adicionales.
-            var money = MoneyAnimal();
+            var moneys = MoneyAnimal();
+            
+         
 
             // Verificar si el número de días de internamiento es igual a cero.
-            if (data.stay_days == 0) return money;
+            if (data.stay_days == 0) return moneys;
 
             // Calcular el costo total multiplicando el costo diario por el número de días de internamiento.
-            double total = money * data.stay_days;
+            moneys.Total = moneys.Total * data.stay_days;
 
-            return total;
+            return moneys;
         }
 
 
@@ -122,52 +122,60 @@ namespace veterinaria
         /// al costo base de acuerdo con el tipo de mascota.
         /// </remarks>
         /// <returns>El costo total de tratamientos y servicios adicionales para la mascota.</returns>
-        private int MoneyAnimal()
+        private ITF_Totals MoneyAnimal()
         {
-            // Inicializar el costo total en cero.
-            var total = 0;
+            // Inicializar el costo total y de los otros en cero.
+            int total = 0, Total_vac = 0, Total_Ali = 0, Total_Ace = 0;
 
             // Verificar si se han seleccionado tratamientos específicos.
             var vac = Equals("Vacunacion");
             var ali = Equals("Alimentacion");
-            var ace = Equals("Aceo");
+            var ace = Equals("Aseo");
 
             // Calcular el costo de tratamientos según el tipo de mascota y tratamientos seleccionados.
             switch (data.raza)
             {
                 case "conejo":
                     total = total + 2500;
-                    if (vac) total = total + 2500;
-                    if (ali) total = total + 1500;
-                    if (ace) total = total + 5000;
+                    if (vac) Total_vac = 2500;
+                    if (ali) Total_Ali = 1500;
+                    if (ace) Total_Ace = 5000;
                     break;
                 case "perro":
                     total = total + 3200;
-                    if (vac) total = total + 3200;
-                    if (ali) total = total + 2000;
-                    if (ace) total = total + 2000;
+                    if (vac) Total_vac = 3200;
+                    if (ali) Total_Ali = 2000;
+                    if (ace) Total_Ace = 2000;
                     break;
                 case "gato":
                     total = total + 3200;
-                    if (vac) total = total + 3200;
-                    if (ali) total = total + 2000;
-                    if (ace) total = total + 2000;
+                    if (vac) Total_vac = 3200;
+                    if (ali) Total_Ali = 2000;
+                    if (ace) Total_Ace = 2000;
                     break;
                 case "perico":
                     total = total + 2500;
-                    if (vac) total = total + 2500;
-                    if (ali) total = total + 1500;
-                    if (ace) total = total + 2000;
+                    if (vac) Total_vac = 2500;
+                    if (ali) Total_Ali = 1500;
+                    if (ace) Total_Ace = 2000;
                     break;
                 case "caballo":
                     total = total + 4800;
-                    if (vac) total = total + 4800;
-                    if (ali) total = total + 4000;
-                    if (ace) total = total + 15000;
+                    if (vac) Total_vac = 4800;
+                    if (ali) Total_Ali = 4000;
+                    if (ace) Total_Ace = 15000;
                     break;
             };
 
-            return total;
+            total = total + Total_Ace + Total_Ali + Total_vac;
+
+            return new ITF_Totals
+            {
+                Total = total,
+                Vacunacion = Total_vac,
+                Aceo = Total_Ace,
+                Alimentacion = Total_Ali
+            };
         }
 
 
@@ -205,7 +213,7 @@ namespace veterinaria
         // Evento que se dispara al hacer clic en el botón "Calcular Total".
         private void btn_save_Click(object sender, EventArgs e)
         {
-            double money = this.Money();
+            double money = this.Money().Total;
 
             lbl_txt_total.Text = "₡ " + money;
         }
@@ -216,7 +224,7 @@ namespace veterinaria
             // Crear una instancia del formulario de inicio y volver a la ventana de inicio.
             var dis = new ITF_home
             {
-                doctor = data.doctor,
+                Doctor = data.Doctor,
             };
 
             var home = new consulta(database, dis);
@@ -232,34 +240,34 @@ namespace veterinaria
             if (!CB_dead.Checked) CB_cremacion.Checked = false;
         }
 
-    /// <summary>
-    /// Manejador de eventos que se ejecuta cuando se carga el formulario de informe.
-    /// </summary>
-    private void report_Load(object sender, EventArgs e)
+        /// <summary>
+        /// Manejador de eventos que se ejecuta cuando se carga el formulario de informe.
+        /// </summary>
+        private void report_Load(object sender, EventArgs e)
         {
-        // Configurar el nombre del doctor en el formulario.
-        lbl_doctor_text.Text = data.doctor;
+            // Configurar el nombre del doctor en el formulario.
+            lbl_doctor_text.Text = data.Doctor.DisplayName;
 
-        // Configurar el diagnóstico en el cuadro de texto de diagnóstico.
-        rtb_diagnostico.Text = data.diagnosis;
+            // Configurar el diagnóstico en el cuadro de texto de diagnóstico.
+            rtb_diagnostico.Text = data.diagnosis;
 
-        // Configurar el estado de vida de la mascota (viva o muerta) en el cuadro de selección.
-        CB_dead.Checked = data.is_dead;
+            // Configurar el estado de vida de la mascota (viva o muerta) en el cuadro de selección.
+            CB_dead.Checked = data.is_dead;
 
-        // Habilitar o deshabilitar la opción de indicar si la mascota está muerta, dependiendo del estado.
-        CB_dead.Enabled = !data.is_dead;
+            // Habilitar o deshabilitar la opción de indicar si la mascota está muerta, dependiendo del estado.
+            CB_dead.Enabled = !data.is_dead;
 
-        // Mostrar u ocultar la opción de cremación dependiendo del estado de vida de la mascota.
-        CB_cremacion.Visible = data.is_dead;
+            // Mostrar u ocultar la opción de cremación dependiendo del estado de vida de la mascota.
+            CB_cremacion.Visible = data.is_dead;
 
-        // Configurar el número de días de estancia en el formulario.
-        lbl_day_text.Text = data.stay_days.ToString();
+            // Configurar el número de días de estancia en el formulario.
+            lbl_day_text.Text = data.stay_days.ToString();
 
-        // Configurar el costo de internamiento en el formulario.
-        lbl_estancia_txt.Text = "₡ " + data.internship_money.ToString();
+            // Configurar el costo de internamiento en el formulario.
+            lbl_estancia_txt.Text = "₡ " + data.internship_money.ToString();
 
-        // Configurar el costo total del tratamiento en el formulario (inicialmente 0).
-        lbl_txt_total.Text = "₡ 0";
+            // Configurar el costo total del tratamiento en el formulario (inicialmente 0).
+            lbl_txt_total.Text = "₡ 0";
         }
 
     }

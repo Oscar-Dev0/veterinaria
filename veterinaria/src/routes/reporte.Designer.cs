@@ -47,7 +47,7 @@
             CLBx_tratamiento.BorderStyle = BorderStyle.None;
             CLBx_tratamiento.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
             CLBx_tratamiento.FormattingEnabled = true;
-            CLBx_tratamiento.Items.AddRange(new object[] { "Vacunacion", "Alimentacion", "Aceo" });
+            CLBx_tratamiento.Items.AddRange(new object[] { "Vacunacion", "Alimentacion", "Aseo" });
             CLBx_tratamiento.Location = new Point(61, 195);
             CLBx_tratamiento.Name = "CLBx_tratamiento";
             CLBx_tratamiento.Size = new Size(142, 60);

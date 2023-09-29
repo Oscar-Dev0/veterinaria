@@ -1,5 +1,6 @@
 ﻿using Microsoft.VisualBasic.ApplicationServices;
 using Npgsql;
+using veterinaria.src.itf;
 
 namespace veterinaria.src.functions
 {
@@ -156,12 +157,5 @@ namespace veterinaria.src.functions
 
 
 
-    // Clase que representa un usuario en la base de datos.
-    class Usuario
-    {
-        public int Id { get; set; }
-        public string Name { get; set; } = "";
-        public string Password { get; set; } = "";
-        public string DisplayName { get; set; } = "";
-    }
+
 }
