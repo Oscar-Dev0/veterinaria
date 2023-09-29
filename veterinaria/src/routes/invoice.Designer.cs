@@ -37,8 +37,8 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.AppWorkspace;
             BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
-            BackgroundImageLayout = ImageLayout.Zoom;
-            ClientSize = new Size(481, 348);
+            BackgroundImageLayout = ImageLayout.Stretch;
+            ClientSize = new Size(432, 556);
             DoubleBuffered = true;
             Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "invoice";
