@@ -36,7 +36,7 @@ namespace veterinaria
             int total = 0, Total_vac = 0, Total_Ali = 0, Total_Ace = 0, Total_Cre = 0;
 
             // Función para verificar si la raza de la mascota coincide.
-            var raza = (string Raza) => data.pet_type == Raza;
+            var raza = (string Raza) => data.Pet_type == Raza;
             // Hacer los bool para verificar si pasan las diferentes cosas
             var vac = Equals("Vacunacion");
             var ali = Equals("Alimentacion");
@@ -92,7 +92,7 @@ namespace veterinaria
             total = data.Stay_days == 0 ? total : total * data.Stay_days;
 
             // Agregar el costo de cremación (si aplica).
-            total = total + Total_Cre + data.internship_money;
+            total = total + Total_Cre + data.Internship_money;
 
             // Devolver un objeto ITF_Totals con los costos calculados.
             return new ITF_Totals
@@ -175,22 +175,22 @@ namespace veterinaria
             lbl_doctor_text.Text = data.Doctor.DisplayName;
 
             // Configurar el diagnóstico en el cuadro de texto de diagnóstico.
-            rtb_diagnostico.Text = data.diagnosis;
+            rtb_diagnostico.Text = data.Diagnosis;
 
             // Configurar el estado de vida de la mascota (viva o muerta) en el cuadro de selección.
-            CB_dead.Checked = data.is_dead;
+            CB_dead.Checked = data.Is_dead;
 
             // Habilitar o deshabilitar la opción de indicar si la mascota está muerta, dependiendo del estado.
-            CB_dead.Enabled = !data.is_dead;
+            CB_dead.Enabled = !data.Is_dead;
 
             // Mostrar u ocultar la opción de cremación dependiendo del estado de vida de la mascota.
-            CB_cremacion.Visible = data.is_dead;
+            CB_cremacion.Visible = data.Is_dead;
 
             // Configurar el número de días de estancia en el formulario.
             lbl_day_text.Text = data.Stay_days.ToString();
 
             // Configurar el costo de internamiento en el formulario.
-            lbl_estancia_txt.Text = "₡ " + data.internship_money.ToString();
+            lbl_estancia_txt.Text = "₡ " + data.Internship_money.ToString();
 
             // Configurar el costo total del tratamiento en el formulario (inicialmente 0).
             lbl_txt_total.Text = "₡ 0";

@@ -145,12 +145,19 @@ namespace veterinaria
             // Crear un objeto ITF_Reporte y guardar los datos ingresados en un nuevo informe.
             var dis = new ITF_Reporte
             {
-                diagnosis = rtb_diagnostico.Text,
+                Diagnosis = rtb_diagnostico.Text,
                 Stay_days = CalculateNumberOfDays(),
                 Doctor = data.Doctor,
-                is_dead = Rbtn_dead_yes.Checked,
-                internship_money = Money(),
-                pet_type = CB_pet.Text.ToString().ToLower()
+                Is_dead = Rbtn_dead_yes.Checked,
+                Internship_money = Money(),
+                Pet_type = CB_pet.Text.ToLower(),
+                Pet_address = txt_direccion.Text,
+                Pet_name = txt_Name_Pet.Text,
+                Pet_owner = txt_Owner.Text,
+                Pet_year = num_year.Value,
+                Pet_race = CB_tipo_raza.Text,
+                Date_of_admission = DTP_pet_ingreso.Value,
+                Is_internship = Rbtn_internar_yes.Checked,
             };
             var reporte = new report(database, dis);
             this.Hide();

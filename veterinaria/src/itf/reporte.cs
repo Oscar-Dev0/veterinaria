@@ -2,36 +2,73 @@
 
 namespace veterinaria.src.itf
 {
-    // La clase ITF_Reporte define las propiedades de un informe veterinario.
-    public partial class ITF_Reporte: ITF_Consulta
+
+    /// <summary>
+    /// La clase ITF_Reporte define las propiedades de un informe veterinario.
+    /// </summary>
+    public partial class ITF_Reporte : ITF_Consulta
     {
+        /// <summary>
+        /// Obtiene o establece el número de días de estancia de la mascota.
+        /// </summary>
+        public int Stay_days { get; set; } = 0;
 
-        // Número de días de estancia de la mascota.
-        public int Stay_days { set; get; } = 0;
+        /// <summary>
+        /// Obtiene o establece el diagnóstico del estado de la mascota.
+        /// </summary>
+        public string Diagnosis { get; set; } = string.Empty;
 
-        // Diagnóstico del estado de la mascota.
-        public string diagnosis { set; get; } = string.Empty;
+        /// <summary>
+        /// Obtiene o establece un valor que indica si la mascota está muerta.
+        /// </summary>
+        public bool Is_dead { get; set; } = false;
 
-        // Indica si la mascota está muerta.
-        public bool is_dead { set; get; } = false;
+        /// <summary>
+        /// Obtiene o establece un valor que indica si la mascota está en internamiento.
+        /// </summary>
+        public bool Is_internship { get; set; } = false;
 
-        // Indica si la mascota está en internamiento.
-        public bool is_internship { set; get; } = false;
+        /// <summary>
+        /// Obtiene o establece el costo del internamiento.
+        /// </summary>
+        public int Internship_money { get; set; } = 0;
 
-        // Costo del internamiento.
-        public int internship_money { set; get; } = 0;
+        /// <summary>
+        /// Obtiene o establece el tipo de raza de la mascota.
+        /// </summary>
+        public string Pet_type { get; set; } = string.Empty;
 
-        // Tipo de raza de la mascota.
-        public string pet_type { set; get; } = string.Empty;
-        
-        public string pet_name { set; get;} = string.Empty;
+        /// <summary>
+        /// Obtiene o establece la raza de la mascota.
+        /// </summary>
+        public string Pet_race { get; set; } = string.Empty;
 
-        public int pet_year { set; get; } = 0;
-        public string pet_owner { set; get;}  = string.Empty;
-        public string pet_address { set; get; } = string.Empty;
-        public DateTime date { set; get; } = DateTime.Now;
+        /// <summary>
+        /// Obtiene o establece la fecha de ingreso de la mascota.
+        /// </summary>
+        public DateTime Date_of_admission { get; set; } = DateTime.Now;
 
+        /// <summary>
+        /// Obtiene o establece el nombre de la mascota.
+        /// </summary>
+        public string Pet_name { get; set; } = string.Empty;
+
+        /// <summary>
+        /// Obtiene o establece la edad de la mascota en años.
+        /// </summary>
+        public decimal Pet_year { get; set; } = 0;
+
+        /// <summary>
+        /// Obtiene o establece el propietario de la mascota.
+        /// </summary>
+        public string Pet_owner { get; set; } = string.Empty;
+
+        /// <summary>
+        /// Obtiene o establece la dirección del propietario de la mascota.
+        /// </summary>
+        public string Pet_address { get; set; } = string.Empty;
     }
+
 
     /// <summary>
     /// Representa los totales relacionados con los costos de tratamiento para una mascota.
