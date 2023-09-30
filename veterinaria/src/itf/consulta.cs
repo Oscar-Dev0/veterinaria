@@ -1,4 +1,5 @@
-﻿using veterinaria.src.itf;
+﻿using veterinaria.src.functions;
+using veterinaria.src.itf;
 
 namespace veterinaria.src.ITF
 {
@@ -11,5 +12,7 @@ namespace veterinaria.src.ITF
         /// Obtiene o establece el usuario o médico que ha iniciado sesión.
         /// </summary>
         public Usuario Doctor { get; set; } = new Usuario();
+
+        public Database DB { get; set; } = new();
     }
 }

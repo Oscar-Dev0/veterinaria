@@ -7,18 +7,16 @@ namespace veterinaria
     // La clase home representa la ventana principal de la aplicación de la veterinaria.
     public partial class consulta : Form
     {
-        // Variables miembro para almacenar la base de datos y datos de inicio de sesión.
-        Database database;
+        //datos de inicio de sesión.
         ITF_Consulta data;
 
         // Constructor de la clase Consulta.
-        public consulta(object db, object dt)
+        public consulta(ITF_Consulta dt)
         {
             InitializeComponent();
 
             // Inicialización de variables miembro.
-            database = (Database)db;
-            data = (ITF_Consulta)dt;
+            data = dt;
 
             // Configuración del nombre del doctor en el formulario.
             lbl_doctor.Text = data.Doctor.DisplayName;
@@ -131,7 +129,7 @@ namespace veterinaria
         private void btn_leave_Click(object sender, EventArgs e)
         {
             // Crear una instancia del formulario de inicio de sesión y ocultar el formulario actual.
-            var login = new Veterinaria_login(database);
+            var login = new Veterinaria_login(data.DB);
             this.Hide();
 
             // Mostrar el formulario de inicio de sesión y liberar recursos del formulario actual.
@@ -158,8 +156,9 @@ namespace veterinaria
                 Pet_race = CB_tipo_raza.Text,
                 Date_of_admission = DTP_pet_ingreso.Value,
                 Is_internship = Rbtn_internar_yes.Checked,
+                DB = data.DB,
             };
-            var reporte = new report(database, dis);
+            var reporte = new report(dis);
             this.Hide();
 
             // Mostrar el formulario de informe y liberar recursos del formulario actual.

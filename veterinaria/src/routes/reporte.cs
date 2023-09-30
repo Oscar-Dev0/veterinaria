@@ -9,17 +9,15 @@ namespace veterinaria
     // La clase report representa la ventana para generar informes veterinarios.
     public partial class report : Form
     {
-        Database database;
         ITF_Reporte data;
 
         // Constructor de la clase report.
-        public report(object s, object d)
+        public report(ITF_Reporte Data)
         {
             InitializeComponent();
 
             // Inicialización de variables miembro.
-            database = (Database)s;
-            data = (ITF_Reporte)d;
+            data = Data;
         }
 
         /// <summary>
@@ -139,9 +137,20 @@ namespace veterinaria
         // Evento que se dispara al hacer clic en el botón "Calcular Total".
         private void btn_save_Click(object sender, EventArgs e)
         {
-            double money = Moneys().Total;
+            var totals = Moneys();
 
-            lbl_txt_total.Text = "₡ " + money;
+            var Invoice = new ITF_invoice(data);
+            Invoice.Totals = totals;
+            Invoice.Is_Vacunacion = Equals("Vacunacion");
+            Invoice.Is_Alimentacion = Equals("Alimentacion");
+            Invoice.Is_aseo = Equals("Aseo");
+            Invoice.Is_Cremacion = CB_cremacion.Checked;
+
+            invoice form = new(Invoice);
+            Hide();
+            form.ShowDialog();
+            Dispose();
+
         }
 
         // Evento que se dispara al hacer clic en el botón "Salir".
@@ -153,7 +162,7 @@ namespace veterinaria
                 Doctor = data.Doctor,
             };
 
-            var home = new consulta(database, dis);
+            var home = new consulta(dis);
             this.Hide();
             home.ShowDialog();
             this.Dispose(true);

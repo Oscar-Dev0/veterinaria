@@ -4,7 +4,7 @@ using veterinaria.src.itf;
 namespace veterinaria.src.functions
 {
     // La clase Database proporciona métodos para conectarse y acceder a la base de datos PostgreSQL.
-    internal class Database
+    public class Database
     {
         // Datos de conexión a la base de datos PostgreSQL.
         private static string Host = "postgresql-oscargamer.alwaysdata.net";
