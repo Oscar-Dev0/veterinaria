@@ -311,7 +311,6 @@
             MdiChildrenMinimizedAnchorBottom = false;
             Name = "consulta";
             Text = "consulta";
-            Load += home_Load;
             ((System.ComponentModel.ISupportInitialize)num_year).EndInit();
             gb_dead.ResumeLayout(false);
             gb_dead.PerformLayout();

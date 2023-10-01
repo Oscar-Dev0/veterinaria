@@ -18,6 +18,9 @@ namespace veterinaria
             // Inicialización de variables miembro.
             data = dt;
 
+            lbl_total_text.Text = "₡ 0";
+            DTP_pet_ingreso.MaxDate = DateTime.Today;
+
             // Configuración del nombre del doctor en el formulario.
             lbl_doctor.Text = data.Doctor.DisplayName;
         }
@@ -95,15 +98,6 @@ namespace veterinaria
             int roundedDays = dateDifference.Days;
 
             return roundedDays;
-        }
-
-
-
-        // Evento que se dispara al cargar el formulario.
-        private void home_Load(object sender, EventArgs e)
-        {
-            lbl_total_text.Text = "₡ 0";
-            DTP_pet_ingreso.MaxDate = DateTime.Today;
         }
 
         // Evento que se dispara al hacer clic en el botón "Limpiar".

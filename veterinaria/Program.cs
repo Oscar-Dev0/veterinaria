@@ -14,7 +14,7 @@ namespace veterinaria
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
             var data = new Database();
-            data.Conection();
+            data.Conection().Users();
             Application.Run(new Veterinaria_login(data));
         }
     }

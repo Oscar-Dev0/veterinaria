@@ -15,11 +15,6 @@ namespace veterinaria
             database = (Database)s;
         }
 
-        // Evento que se dispara al cargar el formulario.
-        private void Form1_Load(object sender, EventArgs e)
-        {
-            // Código de inicialización (si lo hubiera).
-        }
 
         // Evento que se dispara al hacer clic en el botón "Iniciar Sesión".
         private void button1_Click(object sender, EventArgs e)

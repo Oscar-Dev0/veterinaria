@@ -184,7 +184,6 @@
             MdiChildrenMinimizedAnchorBottom = false;
             Name = "report";
             Text = "report";
-            Load += report_Load;
             ResumeLayout(false);
             PerformLayout();
         }

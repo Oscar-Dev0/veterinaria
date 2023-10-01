@@ -18,89 +18,93 @@ namespace veterinaria
 
             // Inicialización de variables miembro.
             data = Data;
+
+            // Configurar el nombre del doctor en el formulario.
+            lbl_doctor_text.Text = data.Doctor.DisplayName;
+
+            // Configurar el diagnóstico en el cuadro de texto de diagnóstico.
+            rtb_diagnostico.Text = data.Diagnosis;
+
+            // Configurar el estado de vida de la mascota (viva o muerta) en el cuadro de selección.
+            CB_dead.Checked = data.Is_dead;
+
+            // Habilitar o deshabilitar la opción de indicar si la mascota está muerta, dependiendo del estado.
+            CB_dead.Enabled = !data.Is_dead;
+
+            // Mostrar u ocultar la opción de cremación dependiendo del estado de vida de la mascota.
+            CB_cremacion.Visible = data.Is_dead;
+
+            // Configurar el número de días de estancia en el formulario.
+            lbl_day_text.Text = data.Stay_days.ToString();
+
+            // Configurar el costo de internamiento en el formulario.
+            lbl_estancia_txt.Text = "₡ " + data.Internship_money.ToString();
+
+            // Configurar el costo total del tratamiento en el formulario (inicialmente 0).
+            lbl_txt_total.Text = "₡ 0";
         }
 
+
         /// <summary>
-        /// Calcula los costos relacionados con el tratamiento de la mascota, incluido el costo total, costo de vacunación, costo de alimentación,
-        /// costo de aseo y costo de cremación.
+        /// Calcula y devuelve los costos relacionados con el cuidado de la mascota, incluyendo alimentación, aseo, vacunación, cremación y estancia.
         /// </summary>
         /// <remarks>
-        /// Este método realiza cálculos detallados de los costos basados en la raza de la mascota, la presencia de tratamientos (vacunación, alimentación, aseo)
-        /// y el período de estancia. Calcula el costo total de tratamiento, el costo de vacunación, el costo de alimentación, el costo de aseo y el costo de cremación (si corresponde).
+        /// Este método realiza cálculos detallados para determinar los costos asociados al cuidado de una mascota en función de varios factores, incluida la raza de la mascota,
+        /// la duración de su estancia y los tratamientos seleccionados, como vacunación, alimentación y aseo. Los costos específicos para cada raza se almacenan en un diccionario
+        /// predefinido, lo que permite una fácil actualización y expansión de los datos de costos según sea necesario.
         /// </remarks>
-        /// <returns>Un objeto ITF_Totals que contiene los costos calculados.</returns>
+        /// <returns>Un objeto ITF_Totals que contiene los costos calculados para alimentación, aseo, vacunación, cremación, estancia y el costo total.</returns>
         private ITF_Totals Moneys()
         {
-            int total = 0, Total_vac = 0, Total_Ali = 0, Total_Ace = 0, Total_Cre = 0;
+            // Diccionario que almacena los costos predefinidos para diferentes razas de mascotas.
+            Dictionary<string, (int Stay, int Vac, int Ali, int Ace, int Cre)> razaCosts = new Dictionary<string, (int, int, int, int, int)>
+    {
+        { "conejo", (2500, 2500, 1500, 5000, 75000) },
+        { "perro", (3200, 3200, 2000, 2000, 100000) },
+        { "gato", (3200, 3200, 2000, 2000, 75000) },
+        { "perico", (2500, 2500, 1500, 2000, 75000) },
+        { "caballo", (4800, 4800, 4000, 15000, 300000) }
+    };
 
-            // Función para verificar si la raza de la mascota coincide.
-            var raza = (string Raza) => data.Pet_type == Raza;
-            // Hacer los bool para verificar si pasan las diferentes cosas
-            var vac = Equals("Vacunacion");
-            var ali = Equals("Alimentacion");
-            var ace = Equals("Aseo");
-            var cre = CB_cremacion.Checked;
-
-            // Verificar la raza de la mascota y realizar cálculos específicos.
-            if (raza("conejo"))
+            // Verificar si la raza de la mascota está en el diccionario de costos.
+            if (razaCosts.TryGetValue(data.Pet_type.ToLower(), out var razaCost))
             {
-                total = total + 2500;
-                if (vac) Total_vac = 2500;
-                if (ali) Total_Ali = 1500;
-                if (ace) Total_Ace = 5000;
-                if (cre) Total_Cre = 75000;
+                int Total_stay = razaCost.Stay;
+                int Total_vac = Equals("Vacunacion") ? razaCost.Vac : 0;
+                int Total_Ali = Equals("Alimentacion") ? razaCost.Ali : 0;
+                int Total_Ace = Equals("Aseo") ? razaCost.Ace : 0;
+                int Total_Cre = CB_cremacion.Checked ? razaCost.Cre : 0;
+
+                // Aplicar multiplicador de días de estancia (si aplica).
+                int stayDaysMultiplier = data.Stay_days == 0 ? 1 : data.Stay_days;
+
+                Total_stay *= stayDaysMultiplier;
+                Total_Ace *= stayDaysMultiplier;
+                Total_Ali *= stayDaysMultiplier;
+                Total_vac *= stayDaysMultiplier;
+
+                // Calcular el costo total.
+                int total = Total_stay + Total_Ace + Total_Ali + Total_vac + data.Internship_money;
+                data.Internship_money += Total_stay;
+
+                // Agregar el costo de cremación (si aplica).
+                total += Total_Cre;
+
+                // Devolver un objeto ITF_Totals con los costos calculados.
+                return new ITF_Totals
+                {
+                    Total = total,
+                    Vacunacion = Total_vac,
+                    Aceo = Total_Ace,
+                    Alimentacion = Total_Ali,
+                    Cremacion = Total_Cre
+                };
             }
-            else if (raza("perro"))
+            else
             {
-                total = total + 3200;
-                if (vac) Total_vac = 3200;
-                if (ali) Total_Ali = 2000;
-                if (ace) Total_Ace = 2000;
-                if (cre) Total_Cre = 100000;
+                // Si la raza no está en el diccionario, devolver un objeto ITF_Totals vacío.
+                return new ITF_Totals();
             }
-            else if (raza("gato"))
-            {
-                total = total + 3200;
-                if (vac) Total_vac = 3200;
-                if (ali) Total_Ali = 2000;
-                if (ace) Total_Ace = 2000;
-                if (cre) Total_Cre = 75000;
-            }
-            else if (raza("perico"))
-            {
-                total = total + 2500;
-                if (vac) Total_vac = 2500;
-                if (ali) Total_Ali = 1500;
-                if (ace) Total_Ace = 2000;
-                if (cre) Total_Cre = 75000;
-            }
-            else if (raza("caballo"))
-            {
-                total = total + 4800;
-                if (vac) Total_vac = 4800;
-                if (ali) Total_Ali = 4000;
-                if (ace) Total_Ace = 15000;
-                if (cre) Total_Cre = 300000;
-            }
-
-            // Calcular el costo total.
-            total = total + Total_Ace + Total_Ali + Total_vac;
-
-            // Aplicar el costo total para un período de estancia (si aplica).
-            total = data.Stay_days == 0 ? total : total * data.Stay_days;
-
-            // Agregar el costo de cremación (si aplica).
-            total = total + Total_Cre + data.Internship_money;
-
-            // Devolver un objeto ITF_Totals con los costos calculados.
-            return new ITF_Totals
-            {
-                Total = total,
-                Vacunacion = Total_vac,
-                Aceo = Total_Ace,
-                Alimentacion = Total_Ali,
-                Cremacion = Total_Cre,
-            };
         }
 
         /// <summary>
@@ -117,21 +121,23 @@ namespace veterinaria
         {
             try
             {
-                // Convertir la clave a minúsculas.
+                // Convertir la clave a minúsculas una sola vez.
                 var k = key.ToLower();
 
-                // Obtener la lista de tratamientos seleccionados.
-                var tratamientosSeleccionados = CLBx_tratamiento.CheckedItems.Cast<string>().ToList();
+                // Obtener la lista de tratamientos seleccionados como una lista de cadenas en minúsculas.
+                var tratamientosSeleccionados = CLBx_tratamiento.CheckedItems.Cast<string>().Select(x => x.ToLower()).ToList();
 
-                // Verificar si la clave está presente en la lista después de convertirla a minúsculas.
-                return tratamientosSeleccionados.Select(x => x.ToString()).Any(x => x.ToLower() == k);
+                // Verificar si la clave está presente en la lista en minúsculas.
+                return tratamientosSeleccionados.Contains(k);
             }
             catch
             {
-                // Manejar cualquier excepción y devolver false en caso de error.
+                // Manejar cualquier excepción y registrarla o lanzar una excepción personalizada si lo deseas.
+                // En este ejemplo, se devuelve false en caso de error.
                 return false;
-            };
+            }
         }
+
 
 
         // Evento que se dispara al hacer clic en el botón "Calcular Total".
@@ -175,35 +181,6 @@ namespace veterinaria
             if (!CB_dead.Checked) CB_cremacion.Checked = false;
         }
 
-        /// <summary>
-        /// Manejador de eventos que se ejecuta cuando se carga el formulario de informe.
-        /// </summary>
-        private void report_Load(object sender, EventArgs e)
-        {
-            // Configurar el nombre del doctor en el formulario.
-            lbl_doctor_text.Text = data.Doctor.DisplayName;
-
-            // Configurar el diagnóstico en el cuadro de texto de diagnóstico.
-            rtb_diagnostico.Text = data.Diagnosis;
-
-            // Configurar el estado de vida de la mascota (viva o muerta) en el cuadro de selección.
-            CB_dead.Checked = data.Is_dead;
-
-            // Habilitar o deshabilitar la opción de indicar si la mascota está muerta, dependiendo del estado.
-            CB_dead.Enabled = !data.Is_dead;
-
-            // Mostrar u ocultar la opción de cremación dependiendo del estado de vida de la mascota.
-            CB_cremacion.Visible = data.Is_dead;
-
-            // Configurar el número de días de estancia en el formulario.
-            lbl_day_text.Text = data.Stay_days.ToString();
-
-            // Configurar el costo de internamiento en el formulario.
-            lbl_estancia_txt.Text = "₡ " + data.Internship_money.ToString();
-
-            // Configurar el costo total del tratamiento en el formulario (inicialmente 0).
-            lbl_txt_total.Text = "₡ 0";
-        }
 
     }
 }
