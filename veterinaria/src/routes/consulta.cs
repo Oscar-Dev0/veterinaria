@@ -31,48 +31,35 @@ namespace veterinaria
             CB_tipo_raza.Enabled = true;
             CB_tipo_raza.Items.Clear();
 
-            var pet = CB_pet.Text.ToString().ToLower();
+            var pet = CB_pet.Text.ToLower();
 
-            // Agregar opciones de razas en función del tipo de mascota seleccionada.
-            switch (pet)
+            // Definir un diccionario que almacena las razas por tipo de mascota.
+            Dictionary<string, List<string>> razasPorMascota = new Dictionary<string, List<string>>
+    {
+        { "conejo", new List<string> { "Belier", "Holanda enano", "Teddy", "Mini Lop", "Flandes" } },
+        { "perro", new List<string> { "Doberman", "Labrador Retriever", "Bulldog", "Poodle", "Golden Retriever" } },
+        { "gato", new List<string> { "Siamés", "Persa", "Maine Coon", "Bengala", "Ragdoll" } },
+        { "perico", new List<string> { "Cotorra Argentina", "Cacatúa", "Agapornis", "Ninfas", "Periquito Australiano" } },
+        { "caballo", new List<string> { "Cuarto de Milla", "Pura Sangre Inglés", "Árabe", "Frisón", "Appaloosa" } }
+    };
+            // Verificar si el tipo de mascota seleccionado existe en el diccionario.
+            if (razasPorMascota.TryGetValue(pet, out var razas))
             {
-                case "conejo":
-                    CB_tipo_raza.Items.Add("Belier");
-                    CB_tipo_raza.Items.Add("Holanda enano");
-                    CB_tipo_raza.Items.Add("Teddy");
-                    CB_tipo_raza.Items.Add("Mini Lop");
-                    CB_tipo_raza.Items.Add("Flandes");
-                    break;
-                case "perro":
-                    CB_tipo_raza.Items.Add("Doberman");
-                    CB_tipo_raza.Items.Add("Labrador Retriever");
-                    CB_tipo_raza.Items.Add("Bulldog");
-                    CB_tipo_raza.Items.Add("Poodle");
-                    CB_tipo_raza.Items.Add("Golden Retriever");
-                    break;
-                case "gato":
-                    CB_tipo_raza.Items.Add("Siamés");
-                    CB_tipo_raza.Items.Add("Persa");
-                    CB_tipo_raza.Items.Add("Maine Coon");
-                    CB_tipo_raza.Items.Add("Bengala");
-                    CB_tipo_raza.Items.Add("Ragdoll");
-                    break;
-                case "perico":
-                    CB_tipo_raza.Items.Add("Cotorra Argentina");
-                    CB_tipo_raza.Items.Add("Cacatúa");
-                    CB_tipo_raza.Items.Add("Agapornis");
-                    CB_tipo_raza.Items.Add("Ninfas");
-                    CB_tipo_raza.Items.Add("Periquito Australiano");
-                    break;
-                case "caballo":
-                    CB_tipo_raza.Items.Add("Cuarto de Milla");
-                    CB_tipo_raza.Items.Add("Pura Sangre Inglés");
-                    CB_tipo_raza.Items.Add("Árabe");
-                    CB_tipo_raza.Items.Add("Frisón");
-                    CB_tipo_raza.Items.Add("Appaloosa");
-                    break;
+                // Agregar las razas al ComboBox.
+                foreach (var raza in razas)
+                {
+                    CB_tipo_raza.Items.Add(raza);
+                }
+            }
+            else
+            {
+                // Manejar el caso de una mascota desconocida o sin razas.
+                // Puedes lanzar una excepción, mostrar un mensaje de error o tomar la acción apropiada según tu lógica de negocio.
+                CB_tipo_raza.Enabled = false;
+                CB_tipo_raza.SelectedIndex = -1;
             }
         }
+
 
         /// <summary>
         /// Calcula el número de días entre la fecha y hora actual y una fecha de ingreso de mascota especificada.
@@ -103,21 +90,22 @@ namespace veterinaria
         // Evento que se dispara al hacer clic en el botón "Limpiar".
         private void btn_delete_Click(object sender, EventArgs e)
         {
-            // Limpiar los campos del formulario.
-            txt_Owner.Text = string.Empty;
-            txt_Name_Pet.Text = string.Empty;
+            // Limpiar los campos del formulario estableciendo los valores predeterminados.
+            txt_Owner.Clear();
+            txt_Name_Pet.Clear();
             CB_pet.SelectedIndex = -1;
-            CB_tipo_raza.Enabled = false;
             CB_tipo_raza.Items.Clear();
+            CB_tipo_raza.Enabled = false;
             CB_tipo_raza.SelectedIndex = -1;
             Rbtn_dead_not.Checked = true;
             Rbtn_internar_not.Checked = true;
             num_year.Value = 0;
-            txt_direccion.Text = string.Empty;
-            rtb_diagnostico.Text = string.Empty;
+            txt_direccion.Clear();
+            rtb_diagnostico.Clear();
             DTP_pet_ingreso.Value = DateTime.Today;
             lbl_total_text.Text = "₡ 0";
         }
+
 
         // Evento que se dispara al hacer clic en el botón "Salir".
         private void btn_leave_Click(object sender, EventArgs e)
