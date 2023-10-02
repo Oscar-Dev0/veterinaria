@@ -1,6 +1,4 @@
 ﻿using System.Data;
-using System.Runtime.ConstrainedExecution;
-using veterinaria.src.functions;
 using veterinaria.src.itf;
 using veterinaria.src.ITF;
 
@@ -133,7 +131,6 @@ namespace veterinaria
             catch
             {
                 // Manejar cualquier excepción y registrarla o lanzar una excepción personalizada si lo deseas.
-                // En este ejemplo, se devuelve false en caso de error.
                 return false;
             }
         }

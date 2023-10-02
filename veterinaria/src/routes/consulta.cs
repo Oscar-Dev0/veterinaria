@@ -54,7 +54,7 @@ namespace veterinaria
             else
             {
                 // Manejar el caso de una mascota desconocida o sin razas.
-                // Puedes lanzar una excepción, mostrar un mensaje de error o tomar la acción apropiada según tu lógica de negocio.
+                // Puedes lanzar una excepción, mostrar un mensaje de error o tomar la acción apropiada según tu lógica.
                 CB_tipo_raza.Enabled = false;
                 CB_tipo_raza.SelectedIndex = -1;
             }

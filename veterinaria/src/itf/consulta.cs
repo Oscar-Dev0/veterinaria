@@ -13,6 +13,9 @@ namespace veterinaria.src.ITF
         /// </summary>
         public Usuario Doctor { get; set; } = new Usuario();
 
-        public Database DB { get; set; } = new();
+        /// <summary>
+        /// Obtiene o establece la base de datos utilizada para consultas.
+        /// </summary>
+        public Database DB { get; set; } = new Database();
     }
 }
