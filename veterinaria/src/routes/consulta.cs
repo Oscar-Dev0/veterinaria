@@ -167,7 +167,7 @@ namespace veterinaria
 
             // Calcular el costo total del internamiento.
             if (dias > 3)
-                total = 15000 * (dias - 3); // Tarifa diaria de $15,000 por cada día adicional.
+                total = 15000 * (dias - 3) + 7000; // Tarifa diaria de $15,000 por cada día adicional y $7,000 para los primeros 3 días.
             else
                 total = 7000; // Tarifa diaria de $7,000 para los primeros 3 días.
 
