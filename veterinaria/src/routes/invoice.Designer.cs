@@ -53,7 +53,7 @@
             // 
             // rtb_Diagnosis
             // 
-            rtb_Diagnosis.ImeMode = ImeMode.NoControl;
+            rtb_Diagnosis.ImeMode = ImeMode.Off;
             rtb_Diagnosis.Location = new Point(-1, 238);
             rtb_Diagnosis.Name = "rtb_Diagnosis";
             rtb_Diagnosis.Size = new Size(430, 69);

@@ -52,6 +52,7 @@
             CLBx_tratamiento.Name = "CLBx_tratamiento";
             CLBx_tratamiento.Size = new Size(142, 60);
             CLBx_tratamiento.TabIndex = 4;
+
             // 
             // rtb_diagnostico
             // 
@@ -87,6 +88,7 @@
             CB_cremacion.TabIndex = 18;
             CB_cremacion.Text = "Cremacion";
             CB_cremacion.UseVisualStyleBackColor = false;
+
             // 
             // lbl_txt_total
             // 

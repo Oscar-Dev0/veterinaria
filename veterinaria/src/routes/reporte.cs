@@ -7,7 +7,7 @@ namespace veterinaria
     // La clase report representa la ventana para generar informes veterinarios.
     public partial class report : Form
     {
-        ITF_Reporte data;
+        ITF_Reporte data = new();
 
         // Constructor de la clase report.
         public report(ITF_Reporte Data)
@@ -68,10 +68,10 @@ namespace veterinaria
             if (razaCosts.TryGetValue(data.Pet_type.ToLower(), out var razaCost))
             {
                 int Total_stay = razaCost.Stay;
-                int Total_vac = Equals("Vacunacion") ? razaCost.Vac : 0;
-                int Total_Ali = Equals("Alimentacion") ? razaCost.Ali : 0;
-                int Total_Ace = Equals("Aseo") ? razaCost.Ace : 0;
-                int Total_Cre = CB_cremacion.Checked ? razaCost.Cre : 0;
+                int Total_vac = razaCost.Vac;
+                int Total_Ali = razaCost.Ali;
+                int Total_Ace = razaCost.Ace;
+                int Total_Cre = razaCost.Cre;
 
                 // Aplicar multiplicador de días de estancia (si aplica).
                 int stayDaysMultiplier = data.Stay_days == 0 ? 1 : data.Stay_days;
@@ -80,6 +80,11 @@ namespace veterinaria
                 Total_Ace *= stayDaysMultiplier;
                 Total_Ali *= stayDaysMultiplier;
                 Total_vac *= stayDaysMultiplier;
+
+                Total_vac = Equals("Vacunacion") ? Total_vac : 0;
+                Total_Ali = Equals("Alimentacion") ? Total_Ali : 0;
+                Total_Ace = Equals("Aseo") ? Total_Ace : 0;
+                Total_Cre = CB_cremacion.Checked ? Total_Cre : 0;
 
                 // Calcular el costo total.
                 int total = Total_stay + Total_Ace + Total_Ali + Total_vac + data.Internship_money;
@@ -101,7 +106,9 @@ namespace veterinaria
             else
             {
                 // Si la raza no está en el diccionario, devolver un objeto ITF_Totals vacío.
-                return new ITF_Totals();
+                return new ITF_Totals { 
+                    Total = data.Internship_money
+                };
             }
         }
 
@@ -163,6 +170,7 @@ namespace veterinaria
             var dis = new ITF_Consulta
             {
                 Doctor = data.Doctor,
+                DB=data.DB
             };
 
             var home = new consulta(dis);
@@ -177,7 +185,5 @@ namespace veterinaria
             CB_cremacion.Visible = CB_dead.Checked;
             if (!CB_dead.Checked) CB_cremacion.Checked = false;
         }
-
-
     }
 }
